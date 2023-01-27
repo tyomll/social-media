@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import FriendsBar from './friendsBar/FriendsBar';
 import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
@@ -14,13 +14,21 @@ const layoutContentStyles = {
 };
 
 const MainLayout: React.FC = () => {
+  const location = useLocation();
   return (
     <>
       <Header />
+
       <div style={layoutContentStyles}>
-        <Sidebar />
-        <Outlet />
-        <FriendsBar />
+        {location.pathname === '/register' || location.pathname === '/login' ? (
+          <Outlet />
+        ) : (
+          <>
+            <Sidebar />
+            <Outlet />
+            <FriendsBar />
+          </>
+        )}
       </div>
     </>
   );

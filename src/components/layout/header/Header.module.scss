@@ -64,11 +64,47 @@
     }
     .avatar {
       cursor: pointer;
-
       img {
         border-radius: 15px;
         width: 50px;
         height: 50px;
+      }
+    }
+    .signIn {
+      a {
+        text-decoration: none;
+        display: flex;
+        gap: 10px;
+        color: #23446e;
+        cursor: pointer;
+        transition: 0.5s;
+        &:hover {
+          opacity: 0.8;
+        }
+        svg {
+          font-size: 20px;
+        }
+        span {
+          font-size: 17px;
+          font-weight: 400;
+        }
+      }
+    }
+    .signUp {
+      a {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        padding: 12px;
+        color: white;
+        background-color: #1877f2;
+        gap: 10px;
+        cursor: pointer;
+        transition: 0.5s;
+        text-decoration: none;
+        &:hover {
+          opacity: 0.8;
+        }
       }
     }
   }

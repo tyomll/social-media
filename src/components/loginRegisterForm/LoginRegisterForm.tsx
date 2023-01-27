@@ -1,17 +1,31 @@
 import React from 'react';
-import s from './Header.module.scss';
+import s from './LoginRegisterForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faSearch,
-  faPlus,
-  faArrowRightToBracket,
-  faUserPlus,
-} from '@fortawesome/free-solid-svg-icons';
-import { useAuth } from '../../../hooks/use-auth';
-import { Link } from 'react-router-dom';
+import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
-const Header: React.FC = () => {
-  const auth = useAuth();
+interface AuthDataType {
+  username: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
+interface LoginRegisterFormProps {
+  content: {
+    type: string;
+    formHeading: string;
+    formHint: string;
+    btnText: string;
+  };
+  submitHandler: (username: string | null, email: string, password: string) => void;
+}
+const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({ content, submitHandler }) => {
+  const [authData, setAuthData] = React.useState<AuthDataType>({
+    username: '',
+    email: '',
+    password: '',
+    passwordConfirmation: '',
+  });
 
   return (
     <div className={s.root}>
@@ -41,47 +55,73 @@ const Header: React.FC = () => {
               d=" M217.537811,268.441895   C202.461258,260.033478 190.318741,249.121262 183.061829,233.615784   C165.276703,195.615189 185.460892,152.948517 226.461929,142.162521   C254.447571,134.800430 281.934937,137.867767 308.891296,147.536560   C315.277893,149.827332 321.597443,152.305069 328.494598,154.902740   C322.994904,168.182129 317.685669,181.001709 312.250427,194.125488   C304.769409,191.429596 297.686401,188.619354 290.440735,186.322159   C277.206879,182.126419 263.734711,179.294022 249.704346,180.855469   C234.312668,182.568420 225.729431,192.593826 226.843918,207.397339   C227.332825,213.891159 230.655182,218.915131 235.657318,222.414062   C241.901123,226.781509 248.662048,230.433273 255.319717,234.180817   C271.247559,243.146500 287.879364,251.027725 303.087830,261.071686   C338.316895,284.337585 335.330811,335.009399 313.571716,357.575470   C301.155609,370.452026 285.822845,377.478638 268.513641,380.436066   C237.576614,385.721954 207.526108,382.620605 178.493607,370.357941   C175.391357,369.047638 174.290558,367.436249 174.336258,364.073456   C174.523972,350.266266 174.414719,336.455048 174.414719,321.729736   C177.974823,323.256500 180.932266,324.556610 183.914017,325.798401   C205.248642,334.683197 227.006073,341.874603 250.527481,340.943787   C255.269287,340.756134 260.163086,339.819641 264.635406,338.236023   C280.828888,332.502045 285.766693,312.486725 273.444550,300.544922   C267.471161,294.755890 259.887848,290.410980 252.529282,286.318756   C241.196213,280.016266 229.429504,274.493561 217.537811,268.441895  z"
             />
           </svg>
-          <span>Socialsquare</span>
         </div>
-        <div className={s.actions}>
-          <div className={s.search}>
-            <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search..." />
+        <div className={s.card}>
+          <div className={s.heading}>
+            <h2>{content.formHeading}</h2>
+            <span>{content.formHint}</span>
           </div>
-
-          {auth.isAuth ? (
-            <>
-              <div className={s.create}>
-                <FontAwesomeIcon icon={faPlus} />
-                <span>Create</span>
-              </div>
-              <div className={s.avatar}>
-                <img
-                  src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
-                  alt="avatar"
+          <div className={s.form}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (content.type === 'login') {
+                  submitHandler(null, authData.email, authData.password);
+                } else {
+                  submitHandler(authData.username, authData.email, authData.password);
+                }
+              }}>
+              {content.type === 'register' && (
+                <div className={s.input}>
+                  <FontAwesomeIcon icon={faUser} />
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    onChange={(e) => {
+                      setAuthData({ ...authData, username: e.target.value });
+                    }}
+                  />
+                </div>
+              )}
+              <div className={s.input}>
+                <FontAwesomeIcon icon={faEnvelope} />
+                <input
+                  type="text"
+                  placeholder={content.type === 'login' ? 'Your email' : 'Email'}
+                  onChange={(e) => {
+                    setAuthData({ ...authData, email: e.target.value });
+                  }}
                 />
               </div>
-            </>
-          ) : (
-            <>
-              <div className={s.signIn}>
-                <Link to="login">
-                  <FontAwesomeIcon icon={faArrowRightToBracket} />
-                  <span>Log in</span>
-                </Link>
+              <div className={s.input}>
+                <FontAwesomeIcon icon={faLock} />
+                <input
+                  type="password"
+                  placeholder={content.type === 'login' ? 'Your password' : 'Password'}
+                  onChange={(e) => {
+                    setAuthData({ ...authData, password: e.target.value });
+                  }}
+                />
               </div>
-              <div className={s.signUp}>
-                <Link to="register">
-                  <FontAwesomeIcon icon={faUserPlus} />
-                  <span>Register</span>
-                </Link>
-              </div>
-            </>
-          )}
+              {content.type === 'register' && (
+                <div className={s.input}>
+                  <FontAwesomeIcon icon={faLock} />
+                  <input
+                    type="password"
+                    placeholder="Password Confirmation"
+                    onChange={(e) => {
+                      setAuthData({ ...authData, passwordConfirmation: e.target.value });
+                    }}
+                  />
+                </div>
+              )}
+              <button type="submit">{content.btnText}</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Header;
+export default LoginRegisterForm;
