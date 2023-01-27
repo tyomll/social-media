@@ -1,0 +1,58 @@
+.root {
+  width: 25%;
+  .container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    .currentUser {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 15px;
+
+      img {
+        border-radius: 15px;
+        width: 50px;
+        height: 50px;
+      }
+      .userInfo {
+        h4 {
+          color: #1d3a5f;
+        }
+        span {
+          color: #72849b;
+        }
+      }
+    }
+
+    .pages {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      background-color: #fff;
+      padding: 20px 20px 20px 20px;
+      border-radius: 15px;
+      .page {
+        display: flex;
+        align-items: center;
+        height: 70px;
+        width: 90%;
+        gap: 20px;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+        svg {
+          color: #556273;
+          font-size: 20px;
+          cursor: pointer;
+        }
+        span {
+          font-weight: 500;
+          color: #1d3a5f;
+          font-size: 17px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

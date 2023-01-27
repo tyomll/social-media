@@ -1,7 +1,7 @@
 .root {
   display: flex;
   height: 100px;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.198);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
 
   .container {
     display: flex;
@@ -62,7 +62,7 @@
       cursor: pointer;
     }
     .avatar {
-      svg {
+      img {
         border-radius: 15px;
         width: 50px;
         height: 50px;
