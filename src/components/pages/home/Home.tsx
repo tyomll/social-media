@@ -1,8 +1,7 @@
-import { Button } from '@mui/material';
 import React from 'react';
 
 const Home: React.FC = () => {
-  return <div></div>;
+  return <div>sadad</div>;
 };
 
 export default Home;

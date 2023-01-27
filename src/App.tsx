@@ -1,14 +1,15 @@
 import React from 'react';
-import Layout from './components/layout/Layout';
+import { Routes, Route } from 'react-router-dom';
+import MainLayout from './components/layout/MainLayout';
 import Home from './components/pages/home/Home';
 
 const App: React.FC = () => {
   return (
-    <>
-      <Layout>
-        <Home />
-      </Layout>
-    </>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route path="/" element={<Home />} />
+      </Route>
+    </Routes>
   );
 };
 
