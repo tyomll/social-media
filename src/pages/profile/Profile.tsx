@@ -5,12 +5,15 @@ import s from './Profile.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import PostList from '../../components/postList/PostList';
+import UploadAvatarModal from '../../components/uploadAvatarModal/UploadAvatarModal';
 
 const Profile = () => {
   const userData = useUserData(auth.currentUser?.uid);
+  const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
 
   return (
-    <div className={s.root}>
+    <div className={s.root} style={{ overflow: 'disabled' }}>
+      {avatarUploadMode && <UploadAvatarModal />}
       <div className={s.container}>
         <div className={s.user}>
           <div className={s.banner}>
@@ -25,7 +28,7 @@ const Profile = () => {
                 src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
                 alt="avatar"
               />
-              <div className={s.avatarChange}>
+              <div className={s.avatarChange} onClick={() => setAvatarUploadMode(true)}>
                 <FontAwesomeIcon icon={faCamera} />
               </div>
             </div>
