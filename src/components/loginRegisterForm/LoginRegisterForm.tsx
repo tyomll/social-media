@@ -3,11 +3,13 @@ import s from './LoginRegisterForm.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 
-interface AuthDataType {
+export interface AuthDataType {
+  firstName: string;
+  lastName: string;
   username: string;
   email: string;
   password: string;
-  passwordConfirmation: string;
+  passwordConfirmation?: string;
 }
 
 interface LoginRegisterFormProps {
@@ -17,10 +19,12 @@ interface LoginRegisterFormProps {
     formHint: string;
     btnText: string;
   };
-  submitHandler: (username: string | null, email: string, password: string) => void;
+  submitHandler: (arg: AuthDataType) => void;
 }
 const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({ content, submitHandler }) => {
   const [authData, setAuthData] = React.useState<AuthDataType>({
+    firstName: '',
+    lastName: '',
     username: '',
     email: '',
     password: '',
@@ -66,22 +70,46 @@ const LoginRegisterForm: React.FC<LoginRegisterFormProps> = ({ content, submitHa
               onSubmit={(e) => {
                 e.preventDefault();
                 if (content.type === 'login') {
-                  submitHandler(null, authData.email, authData.password);
+                  submitHandler(authData);
                 } else {
-                  submitHandler(authData.username, authData.email, authData.password);
+                  submitHandler(authData);
                 }
               }}>
               {content.type === 'register' && (
-                <div className={s.input}>
-                  <FontAwesomeIcon icon={faUser} />
-                  <input
-                    type="text"
-                    placeholder="Username"
-                    onChange={(e) => {
-                      setAuthData({ ...authData, username: e.target.value });
-                    }}
-                  />
-                </div>
+                <>
+                  <div className={s.fullName}>
+                    <div className={s.input}>
+                      <FontAwesomeIcon icon={faUser} />
+                      <input
+                        type="text"
+                        placeholder="First Name"
+                        onChange={(e) => {
+                          setAuthData({ ...authData, firstName: e.target.value });
+                        }}
+                      />
+                    </div>
+                    <div className={s.input}>
+                      <FontAwesomeIcon icon={faUser} />
+                      <input
+                        type="text"
+                        placeholder="Last Name"
+                        onChange={(e) => {
+                          setAuthData({ ...authData, lastName: e.target.value });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className={s.input}>
+                    <FontAwesomeIcon icon={faUser} />
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      onChange={(e) => {
+                        setAuthData({ ...authData, username: e.target.value });
+                      }}
+                    />
+                  </div>
+                </>
               )}
               <div className={s.input}>
                 <FontAwesomeIcon icon={faEnvelope} />

@@ -46,6 +46,11 @@
           flex-direction: column;
           width: 100%;
           gap: 20px;
+
+          .fullName {
+            display: flex;
+            gap: 20px;
+          }
           .input {
             display: flex;
             align-items: center;

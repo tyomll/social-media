@@ -2,10 +2,12 @@ import React from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
-import { auth, db } from '../../../firebase';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { setAuthUser } from '../../../redux/authUser/slice';
-import LoginRegisterForm from '../../loginRegisterForm/LoginRegisterForm';
+import { auth, db } from '../../firebase';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { setAuthUser } from '../../redux/authUser/slice';
+import LoginRegisterForm, {
+  AuthDataType,
+} from '../../components/loginRegisterForm/LoginRegisterForm';
 
 const signUpStyles = {
   display: 'flex',
@@ -25,18 +27,25 @@ const SignIn: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleRegister(username: string | null, email: string, password: string) {
-    createUserWithEmailAndPassword(auth, email, password).then(async ({ user }) => {
+  function handleRegister(data: AuthDataType) {
+    createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
       const ref = doc(db, 'users', user.uid);
-      await setDoc(ref, { createdAt: Date.now().toString(), username, email });
+      await setDoc(ref, {
+        id: user.uid,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        createdAt: Date.now().toString(),
+        username: data.username,
+        email: data.email,
+      });
       if (auth.currentUser) {
-        await updateProfile(auth.currentUser, { displayName: username });
+        await updateProfile(auth.currentUser, { displayName: data.username });
       }
       dispatch(
         setAuthUser({
+          id: user.uid,
           username: user.displayName,
           email: user.email,
-          id: user.uid,
           token: user.refreshToken,
         }),
       );

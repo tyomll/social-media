@@ -2,6 +2,8 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faContactBook, faImage, faUser } from '@fortawesome/free-solid-svg-icons';
 import s from './Sidebar.module.scss';
+import { auth } from '../../../firebase';
+import { useUserData } from '../../../hooks/useUsers';
 
 const pages = [
   {
@@ -22,6 +24,12 @@ const pages = [
   },
 ];
 const Sidebar: React.FC = () => {
+  const { getUserDataById, userData } = useUserData(auth.currentUser?.uid);
+
+  React.useEffect(() => {
+    getUserDataById();
+  }, []);
+
   return (
     <div className={s.root}>
       <div className={s.container}>
@@ -31,8 +39,8 @@ const Sidebar: React.FC = () => {
             alt="avatar"
           />
           <div className={s.userInfo}>
-            <h4>Artyom Hovsepyan</h4>
-            <span>@tyomhovsepyan</span>
+            <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
+            <span>{'@' + userData?.username}</span>
           </div>
         </div>
 

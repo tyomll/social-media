@@ -9,19 +9,23 @@
     width: 100%;
     padding: 30px;
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      cursor: pointer;
-      svg {
-        border-radius: 15px;
-        width: 50px;
-        height: 50px;
-      }
-      span {
-        font-size: 20px;
-        font-weight: 600;
-        color: #23446e;
+      a {
+        text-decoration: none;
+        align-items: center;
+        gap: 20px;
+        cursor: pointer;
+        display: flex;
+
+        svg {
+          border-radius: 15px;
+          width: 50px;
+          height: 50px;
+        }
+        span {
+          font-size: 20px;
+          font-weight: 600;
+          color: #23446e;
+        }
       }
     }
     .actions {

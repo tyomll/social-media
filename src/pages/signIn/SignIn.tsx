@@ -1,10 +1,13 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../../firebase';
-import { useAppDispatch } from '../../../hooks/redux-hooks';
-import { setAuthUser } from '../../../redux/authUser/slice';
-import LoginRegisterForm from '../../loginRegisterForm/LoginRegisterForm';
+import { auth } from '../../firebase';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { setAuthUser } from '../../redux/authUser/slice';
+import LoginRegisterForm, {
+  AuthDataType,
+} from '../../components/loginRegisterForm/LoginRegisterForm';
+import { UserDataType } from '../../types/userData.type';
 
 const signInStyles = {
   display: 'flex',
@@ -24,8 +27,8 @@ const SignIn: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  function handleLogin(username: string | null, email: string, password: string) {
-    signInWithEmailAndPassword(auth, email, password).then(({ user }) => {
+  function handleLogin(data: AuthDataType) {
+    signInWithEmailAndPassword(auth, data.email, data.password).then(({ user }) => {
       dispatch(
         setAuthUser({
           username: user.displayName,
