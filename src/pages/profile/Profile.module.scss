@@ -1,0 +1,92 @@
+.root {
+  width: 100%;
+  height: 100%;
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 50px;
+    .user {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      .banner {
+        width: 100%;
+        height: 300px;
+        img {
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .info {
+        .avatar {
+          position: absolute;
+          left: 30px;
+          bottom: 50px;
+          width: 140px;
+          height: 140px;
+          img {
+            border-radius: 50%;
+            width: 100%;
+            height: 100%;
+          }
+          .avatarChange {
+            position: absolute;
+            left: 80px;
+            bottom: -20px;
+            background-color: white;
+            border-radius: 50%;
+            padding: 10px;
+            border: 1px solid rgba(145, 164, 191, 0.259);
+            cursor: pointer;
+            svg {
+              color: #1877f2;
+              font-size: 20px;
+              transition: 0.3s;
+            }
+
+            &:hover {
+              svg {
+                color: #5e97e1;
+                font-size: 20px;
+              }
+            }
+          }
+        }
+        .details {
+          display: flex;
+          background-color: #fff;
+          width: 100%;
+          height: 100px;
+          border: 1px solid rgba(128, 128, 128, 0.102);
+          padding-left: 180px;
+          padding-top: 20px;
+          .userData {
+            display: flex;
+            flex-direction: column;
+
+            h2 {
+              color: #1d3a5f;
+            }
+            span {
+              color: rgb(145, 164, 191);
+            }
+          }
+        }
+      }
+    }
+    .posts {
+      padding: 20px;
+      border-radius: 15px;
+      h2 {
+        margin-left: 20px;
+        color: #1d3a5f;
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

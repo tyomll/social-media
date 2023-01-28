@@ -4,6 +4,7 @@ import { faHome, faContactBook, faImage, faUser } from '@fortawesome/free-solid-
 import s from './Sidebar.module.scss';
 import { auth } from '../../../firebase';
 import { useUserData } from '../../../hooks/useUsers';
+import { Link } from 'react-router-dom';
 
 const pages = [
   {
@@ -24,20 +25,18 @@ const pages = [
   },
 ];
 const Sidebar: React.FC = () => {
-  const { getUserDataById, userData } = useUserData(auth.currentUser?.uid);
-
-  React.useEffect(() => {
-    getUserDataById();
-  }, []);
+  const userData = useUserData(auth.currentUser?.uid);
 
   return (
     <div className={s.root}>
       <div className={s.container}>
         <div className={s.currentUser}>
-          <img
-            src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
-            alt="avatar"
-          />
+          <Link to="profile">
+            <img
+              src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
+              alt="avatar"
+            />
+          </Link>
           <div className={s.userInfo}>
             <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
             <span>{'@' + userData?.username}</span>

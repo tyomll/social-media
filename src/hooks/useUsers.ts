@@ -7,7 +7,7 @@ export const useUserData = (id: string | undefined) => {
   const [userData, setUserData] = React.useState<DocumentData | UserDataType>();
 
   async function getUserDataById() {
-    if (id && userData === undefined) {
+    if (id) {
       const ref = doc(db, 'users', id);
       const data = await getDoc(ref);
       setUserData(data.data());
@@ -18,8 +18,7 @@ export const useUserData = (id: string | undefined) => {
     getUserDataById();
   }, [id]);
 
-  return { getUserDataById, userData };
-};
-
+  return userData;
+}
 
 

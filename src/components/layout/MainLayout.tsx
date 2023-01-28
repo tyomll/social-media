@@ -6,7 +6,6 @@ import Sidebar from './sidebar/Sidebar';
 
 const layoutContentStyles = {
   display: 'flex',
-  justifyContent: 'space-between',
   padding: '30px',
   minHeight: 'calc(100vh - 100px)',
   backgroundColor: '#F9FAFC',
@@ -26,7 +25,7 @@ const MainLayout: React.FC = () => {
           <>
             <Sidebar />
             <Outlet />
-            <FriendsBar />
+            {location.pathname !== '/profile' && <FriendsBar />}
           </>
         )}
       </div>
