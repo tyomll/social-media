@@ -2,14 +2,16 @@ import React from 'react';
 import Avatar from 'react-avatar-edit';
 import s from './UploadAvatarModal.module.scss';
 
-function UploadAvatarModal() {
-  const [preview, setPreview] = React.useState(null);
-
+interface UploadAvatarModalType {
+  setAvatar: (arg: string | null) => void;
+  onSubmit: () => void;
+}
+const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatar, onSubmit }) => {
   function onClose() {
-    setPreview(null);
+    setAvatar(null);
   }
-  function onCrop(pv: any) {
-    setPreview(pv);
+  function onCrop(preview: any) {
+    setAvatar(preview);
   }
 
   return (
@@ -34,14 +36,13 @@ function UploadAvatarModal() {
             cursor: 'pointer',
           }}
         />
-        {preview && <img src={preview} alt="Preview" />}
 
         <div className={s.buttons}>
-          <button>Close</button>
-          <button>Save</button>
+          <button onClick={onClose}>Close</button>
+          <button onClick={onSubmit}>Save</button>
         </div>
       </div>
     </div>
   );
-}
+};
 export default UploadAvatarModal;

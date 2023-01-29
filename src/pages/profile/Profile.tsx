@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth } from '../../firebase';
-import { useUserData } from '../../hooks/useUsers';
+import { useGetUserAvatar, useUserAvatarUpload, useUserData } from '../../hooks/useUsers';
 import s from './Profile.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
@@ -9,11 +9,28 @@ import UploadAvatarModal from '../../components/uploadAvatarModal/UploadAvatarMo
 
 const Profile = () => {
   const userData = useUserData(auth.currentUser?.uid);
+  const { avatar, getAvatar } = useGetUserAvatar(auth.currentUser?.uid);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
+  const [avatarImage, setAvatarImage] = React.useState<string | null>(null);
+  const uploadAvatar = useUserAvatarUpload(avatarImage!);
+
+  async function onAvatarUpload() {
+    setAvatarUploadMode(false);
+    await uploadAvatar();
+    await getAvatar();
+  }
+
+  React.useEffect(() => {
+    (async () => {
+      await getAvatar();
+    })();
+  }, [avatarUploadMode]);
 
   return (
     <div className={s.root} style={{ overflow: 'disabled' }}>
-      {avatarUploadMode && <UploadAvatarModal />}
+      {avatarUploadMode && (
+        <UploadAvatarModal setAvatar={setAvatarImage} onSubmit={onAvatarUpload} />
+      )}
       <div className={s.container}>
         <div className={s.user}>
           <div className={s.banner}>
@@ -24,10 +41,7 @@ const Profile = () => {
           </div>
           <div className={s.info}>
             <div className={s.avatar}>
-              <img
-                src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
-                alt="avatar"
-              />
+              <img src={avatar} alt="avatar" />
               <div className={s.avatarChange} onClick={() => setAvatarUploadMode(true)}>
                 <FontAwesomeIcon icon={faCamera} />
               </div>
