@@ -9,9 +9,19 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../hooks/use-auth';
 import { Link } from 'react-router-dom';
+import { auth } from '../../../firebase';
+import { useGetUserAvatar } from '../../../hooks/useUsers';
+import Avatar from '../../avatar/Avatar';
 
 const Header: React.FC = () => {
-  const auth = useAuth();
+  const { isAuth } = useAuth();
+  const { getAvatar } = useGetUserAvatar(auth.currentUser?.uid);
+
+  React.useEffect(() => {
+    (async () => {
+      await getAvatar();
+    })();
+  }, []);
 
   return (
     <div className={s.root}>
@@ -51,17 +61,14 @@ const Header: React.FC = () => {
             <input type="text" placeholder="Search..." />
           </div>
 
-          {auth.isAuth ? (
+          {isAuth ? (
             <>
               <div className={s.create}>
                 <FontAwesomeIcon icon={faPlus} />
                 <span>Create</span>
               </div>
               <div className={s.avatar}>
-                <img
-                  src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
-                  alt="avatar"
-                />
+                <Avatar />
               </div>
             </>
           ) : (

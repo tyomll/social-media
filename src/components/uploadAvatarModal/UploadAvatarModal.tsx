@@ -1,12 +1,20 @@
 import React from 'react';
 import Avatar from 'react-avatar-edit';
+import { useUserAvatarUpload } from '../../hooks/useUsers';
 import s from './UploadAvatarModal.module.scss';
 
 interface UploadAvatarModalType {
-  setAvatar: (arg: string | null) => void;
-  onSubmit: () => void;
+  setAvatarUploadMode: (arg: boolean) => void;
 }
-const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatar, onSubmit }) => {
+const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatarUploadMode }) => {
+  const [avatar, setAvatar] = React.useState<string | null>(null);
+  const uploadAvatar = useUserAvatarUpload(avatar!);
+
+  async function onSubmit() {
+    setAvatarUploadMode(false);
+    await uploadAvatar();
+  }
+
   function onClose() {
     setAvatar(null);
   }

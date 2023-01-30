@@ -43,6 +43,7 @@ const SignIn: React.FC = () => {
       }
       dispatch(
         setAuthUser({
+          avatar: null,
           id: user.uid,
           username: user.displayName,
           email: user.email,

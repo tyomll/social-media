@@ -1,0 +1,31 @@
+.avatar {
+  width: 100%;
+  height: 100%;
+  img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+  }
+  .avatarChange {
+    position: absolute;
+    left: 80px;
+    bottom: -20px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 10px;
+    border: 1px solid rgba(145, 164, 191, 0.259);
+    cursor: pointer;
+    svg {
+      color: #1877f2;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    &:hover {
+      svg {
+        color: #5e97e1;
+        font-size: 20px;
+      }
+    }
+  }
+}
