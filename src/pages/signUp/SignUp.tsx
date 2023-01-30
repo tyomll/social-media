@@ -31,6 +31,8 @@ const SignIn: React.FC = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
       const ref = doc(db, 'users', user.uid);
       await setDoc(ref, {
+        avatar:
+          'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
         id: user.uid,
         firstName: data.firstName,
         lastName: data.lastName,
@@ -39,11 +41,16 @@ const SignIn: React.FC = () => {
         email: data.email,
       });
       if (auth.currentUser) {
-        await updateProfile(auth.currentUser, { displayName: data.username });
+        await updateProfile(auth.currentUser, {
+          displayName: data.username,
+          photoURL:
+            'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
+        });
       }
       dispatch(
         setAuthUser({
-          avatar: null,
+          avatar:
+            'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
           id: user.uid,
           username: user.displayName,
           email: user.email,

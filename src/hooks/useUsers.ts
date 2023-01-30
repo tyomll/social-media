@@ -46,20 +46,24 @@ export const useUserAvatarUpload = (avatar: string) => {
 }
 
 
-export function useGetUserAvatar(id: string | undefined) {
-  const [avatar, setAvatar] = React.useState('')
+export function useGetCurrentUserAvatar(id: string | undefined) {
   const currentUser = useAppSelector(state => state.authUser)
   const dispatch = useAppDispatch()
 
   async function getAvatar() {
     if (id) {
-      const fileRef = ref(storage, 'userAvatars/' + id + '.png');
-      await getDownloadURL(fileRef).then(async (url) => {
-        dispatch(setAuthUser({ ...currentUser, avatar: url }))
-        setAvatar(url);
-      })
+      if (auth.currentUser?.photoURL !== 'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a') {
+        const fileRef = ref(storage, 'userAvatars/' + id + '.png');
+        await getDownloadURL(fileRef).then(async (url) => {
+          dispatch(setAuthUser({ ...currentUser, avatar: url }))
+        })
+      }
+      else {
+        dispatch(setAuthUser({ ...currentUser, avatar: 'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a' }))
+      }
     }
   }
+
   React.useEffect(() => {
     (async () => {
       if (id) {
@@ -68,5 +72,5 @@ export function useGetUserAvatar(id: string | undefined) {
     })()
   }, [id])
 
-  return { avatar, getAvatar }
+  return { getAvatar }
 }

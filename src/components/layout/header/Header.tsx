@@ -9,19 +9,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useAuth } from '../../../hooks/use-auth';
 import { Link } from 'react-router-dom';
-import { auth } from '../../../firebase';
-import { useGetUserAvatar } from '../../../hooks/useUsers';
+
 import Avatar from '../../avatar/Avatar';
 
 const Header: React.FC = () => {
   const { isAuth } = useAuth();
-  const { getAvatar } = useGetUserAvatar(auth.currentUser?.uid);
-
-  React.useEffect(() => {
-    (async () => {
-      await getAvatar();
-    })();
-  }, []);
 
   return (
     <div className={s.root}>

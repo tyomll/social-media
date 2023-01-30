@@ -5,6 +5,7 @@ import s from './Sidebar.module.scss';
 import { auth } from '../../../firebase';
 import { useUserData } from '../../../hooks/useUsers';
 import { Link } from 'react-router-dom';
+import Avatar from '../../avatar/Avatar';
 
 const pages = [
   {
@@ -32,17 +33,13 @@ const Sidebar: React.FC = () => {
       <div className={s.container}>
         <div className={s.currentUser}>
           <Link to="profile">
-            <img
-              src="https://2.gravatar.com/avatar/8196ac7ecc62ed5aaa2879fe15733dce?s=204&d=identicon&r=G"
-              alt="avatar"
-            />
+            <Avatar />
           </Link>
           <div className={s.userInfo}>
             <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
             <span>{'@' + userData?.username}</span>
           </div>
         </div>
-
         <div className={s.pages}>
           {pages.map((page, i) => {
             return (
