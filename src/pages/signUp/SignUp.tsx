@@ -22,6 +22,10 @@ const content = {
   formHint: 'Register to access to all features of Socialsquare.',
   btnText: 'Sign Up',
 };
+export const defaultAvatar =
+  'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a';
+export const defaultCoverImage =
+  'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultCover.png?alt=media&token=b28e10b3-f4ae-4dd9-b066-c1053c6182e0';
 
 const SignIn: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -31,26 +35,25 @@ const SignIn: React.FC = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
       const ref = doc(db, 'users', user.uid);
       await setDoc(ref, {
-        avatar:
-          'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
+        avatar: defaultAvatar,
         id: user.uid,
         firstName: data.firstName,
         lastName: data.lastName,
         createdAt: Date.now().toString(),
         username: data.username,
         email: data.email,
+        coverImage: defaultCoverImage,
       });
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
           displayName: data.username,
-          photoURL:
-            'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
+          photoURL: defaultAvatar,
         });
       }
       dispatch(
         setAuthUser({
-          avatar:
-            'https://firebasestorage.googleapis.com/v0/b/social-media-c7b8a.appspot.com/o/defaultAvatar.png?alt=media&token=f2894209-9a04-4845-b464-fa93cad22a5a',
+          avatar: defaultAvatar,
+          coverImage: defaultCoverImage,
           id: user.uid,
           username: user.displayName,
           email: user.email,

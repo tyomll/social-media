@@ -1,5 +1,6 @@
 import React from 'react';
 import Avatar from 'react-avatar-edit';
+import { auth } from '../../firebase';
 import { useUserAvatarUpload } from '../../hooks/useUsers';
 import s from './UploadAvatarModal.module.scss';
 
@@ -8,13 +9,15 @@ interface UploadAvatarModalType {
 }
 const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatarUploadMode }) => {
   const [avatar, setAvatar] = React.useState<string | null>(null);
-  const uploadAvatar = useUserAvatarUpload(avatar!);
+  const uploadAvatar = useUserAvatarUpload(avatar!, auth.currentUser!.uid);
 
   async function onSubmit() {
     setAvatarUploadMode(false);
     await uploadAvatar();
   }
-
+  function onCloseModal() {
+    setAvatarUploadMode(false);
+  }
   function onClose() {
     setAvatar(null);
   }
@@ -46,7 +49,7 @@ const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatarUploadMod
         />
 
         <div className={s.buttons}>
-          <button onClick={onClose}>Close</button>
+          <button onClick={onCloseModal}>Close</button>
           <button onClick={onSubmit}>Save</button>
         </div>
       </div>

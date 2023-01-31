@@ -1,4 +1,6 @@
 export interface UserDataType {
+  avatar: string,
+  coverImage: string,
   id: string,
   firstName: string,
   lastName: string,

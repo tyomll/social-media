@@ -12,14 +12,27 @@
       width: 100%;
       height: 100%;
       .banner {
+        display: flex;
+        position: relative;
         width: 100%;
         height: 300px;
-        img {
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        label {
+          display: flex;
+          align-items: center;
+          position: absolute;
+          right: 30px;
+          bottom: 20px;
+          background-color: #313131ab;
+          padding: 10px;
+          cursor: pointer;
+          border-radius: 5px;
+          color: white;
+          gap: 10px;
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #313131c7;
+          }
         }
       }
       .info {

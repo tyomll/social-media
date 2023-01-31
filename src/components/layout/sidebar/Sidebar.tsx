@@ -26,8 +26,11 @@ const pages = [
   },
 ];
 const Sidebar: React.FC = () => {
-  const userData = useUserData(auth.currentUser?.uid);
+  const { loading, userData } = useUserData(auth.currentUser?.uid);
 
+  if (loading) {
+    return <>loading...</>;
+  }
   return (
     <div className={s.root}>
       <div className={s.container}>

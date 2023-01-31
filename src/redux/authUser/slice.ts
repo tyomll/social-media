@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface InitialStateType {
   avatar: string | null;
+  coverImage: string | null;
   username: string | null;
   email: string | null;
   token: string | null;
@@ -10,6 +11,7 @@ export interface InitialStateType {
 }
 const initialState: InitialStateType = {
   avatar: null,
+  coverImage: null,
   username: null,
   email: null,
   token: null,
@@ -22,6 +24,7 @@ const authUser = createSlice({
   reducers: {
     setAuthUser(state: InitialStateType, action: PayloadAction<InitialStateType>) {
       state.avatar = action.payload.avatar
+      state.coverImage = action.payload.coverImage
       state.username = action.payload.username
       state.email = action.payload.email;
       state.token = action.payload.token;
