@@ -1,6 +1,6 @@
 import { PostDataType } from './../types/postData.type';
 import React from 'react'
-import { collection, addDoc, onSnapshot, query, orderBy, } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, query, orderBy, where, } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { uuidv4 } from '@firebase/util';
 import { auth, db, storage } from "../firebase";
@@ -46,11 +46,18 @@ export const usePost = () => {
   const getPosts = async () => {
     const q = query(collection(db, "posts"), orderBy('date', 'desc'));
     onSnapshot(q, (data) => {
-      const dataa = data.docs.map((doc) => ({ ...doc.data() as Record<string, unknown> })) as any
+      const dataa = data.docs.map((doc) => ({ ...doc.data() as Record<string, unknown>, id: doc.id })) as any
       setPosts(dataa)
     })
   }
-  return { posts, getPosts, uploadPost }
+  const getUserPosts = async (id: string) => {
+    const q = query(collection(db, "posts"), where('author.id', '==', id), orderBy('date', 'desc'));
+    onSnapshot(q, (data) => {
+      const dataa = data.docs.map((doc) => ({ ...doc.data() as Record<string, unknown>, id: doc.id })) as any
+      setPosts(dataa)
+    })
+  }
+  return { posts, getUserPosts, getPosts, uploadPost }
 }
 
 

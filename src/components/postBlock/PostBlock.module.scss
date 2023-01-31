@@ -48,4 +48,39 @@
       cursor: pointer;
     }
   }
+  .actions {
+    display: flex;
+    gap: 30px;
+    margin-left: 5px;
+    .like {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      svg {
+        width: 25px;
+        height: 25px;
+        color: rgb(145, 164, 191);
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          color: rgba(189, 9, 9, 0.979);
+        }
+      }
+      span {
+        font-weight: 500;
+      }
+    }
+    .comment {
+      svg {
+        width: 25px;
+        height: 25px;
+        color: rgb(145, 164, 191);
+        cursor: pointer;
+        transition: 0.2s ease-in-out;
+        &:hover {
+          color: #1d3a5f;
+        }
+      }
+    }
+  }
 }

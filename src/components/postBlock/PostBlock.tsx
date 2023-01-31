@@ -1,11 +1,20 @@
-import { format, formatDistanceToNow } from 'date-fns';
 import React from 'react';
+import { formatDistanceToNow } from 'date-fns';
 import { useUserData } from '../../hooks/useUsers';
 import { PostDataType } from '../../types/postData.type';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './PostBlock.module.scss';
+import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { auth } from '../../firebase';
+import { onLike } from '../../utils/onLike';
 
-const PostBlock: React.FC<PostDataType> = ({ text, image, author, date }) => {
+const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, likes }) => {
   const { userData } = useUserData(author.id);
+  const [isPostLiked, setIsPostLiked] = React.useState(likes.includes(auth.currentUser!.uid));
+
+  React.useEffect(() => {
+    setIsPostLiked(likes.includes(auth.currentUser!.uid));
+  }, [likes]);
 
   return (
     <div className={s.post}>
@@ -19,6 +28,18 @@ const PostBlock: React.FC<PostDataType> = ({ text, image, author, date }) => {
       <div className={s.description}>{text}</div>
       <div className={s.images}>
         <img src={image} alt="post" />
+      </div>
+      <div className={s.actions}>
+        <div className={s.like} onClick={() => onLike(id, auth.currentUser!.uid, isPostLiked)}>
+          <FontAwesomeIcon
+            icon={faHeart}
+            style={{ color: isPostLiked ? 'rgba(189, 9, 9, 0.979)' : '' }}
+          />
+          <span>{likes.length}</span>
+        </div>
+        <div className={s.comment}>
+          <FontAwesomeIcon icon={faComment} />
+        </div>
       </div>
     </div>
   );
