@@ -1,10 +1,8 @@
-import { useAppDispatch, useAppSelector } from './redux-hooks';
 import React from "react"
 import { doc, DocumentData, onSnapshot, updateDoc } from "firebase/firestore"
 import { auth, db, storage } from "../firebase"
 import { UserDataType } from "../types/userData.type";
 import { ref, uploadString, getDownloadURL, uploadBytes } from "firebase/storage";
-import { setAuthUser } from '../redux/authUser/slice';
 
 export const useUserData = (id: string | undefined) => {
   const [userData, setUserData] = React.useState<DocumentData | UserDataType>();
@@ -27,8 +25,6 @@ export const useUserData = (id: string | undefined) => {
 }
 
 export const useUserAvatarUpload = (avatar: string, id: string) => {
-  const currentUser = useAppSelector(state => state.authUser)
-  const dispatch = useAppDispatch()
 
   async function uploadAvatar() {
     if (auth.currentUser) {
@@ -41,15 +37,12 @@ export const useUserAvatarUpload = (avatar: string, id: string) => {
       await updateDoc(userRef, {
         avatar: photoURL
       })
-      dispatch(setAuthUser({ ...currentUser, avatar: photoURL }))
     }
   }
   return uploadAvatar
 }
 
 export const useUserCoverImageUpload = () => {
-  const currentUser = useAppSelector(state => state.authUser)
-  const dispatch = useAppDispatch()
 
   async function uploadCoverImage(id: string | undefined, cover: File | undefined) {
     if (id) {
@@ -60,7 +53,6 @@ export const useUserCoverImageUpload = () => {
           updateDoc(userRef, {
             coverImage: coverURL
           })
-          dispatch(setAuthUser({ ...currentUser, coverImage: coverURL }))
         })
       })
     }

@@ -52,8 +52,6 @@ const SignIn: React.FC = () => {
       }
       dispatch(
         setAuthUser({
-          avatar: defaultAvatar,
-          coverImage: defaultCoverImage,
           id: user.uid,
           username: user.displayName,
           email: user.email,

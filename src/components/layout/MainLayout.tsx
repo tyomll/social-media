@@ -17,7 +17,6 @@ const MainLayout: React.FC = () => {
   return (
     <>
       <Header />
-
       <div style={layoutContentStyles}>
         {location.pathname === '/register' || location.pathname === '/login' ? (
           <Outlet />

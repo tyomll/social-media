@@ -1,0 +1,134 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh);
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.338);
+  z-index: 4444;
+  .container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 450px;
+    max-height: 500px;
+    background-color: #fff;
+    border-radius: 15px;
+    border: 2px solid rgba(128, 128, 128, 0.22);
+    gap: 20px;
+    overflow: auto;
+    position: relative;
+    .author {
+      display: flex;
+      align-content: center;
+      gap: 10px;
+      .avatar {
+        width: 60px;
+        height: 60px;
+      }
+      .details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        h4 {
+          color: #1d3a5f;
+        }
+        span {
+          color: rgb(145, 164, 191);
+        }
+      }
+      .closeModal {
+        svg {
+          position: absolute;
+          color: white;
+          background-color: #313131ad;
+          padding: 5px;
+          border-radius: 50%;
+          right: 30px;
+          top: 30px;
+          width: 15px;
+          height: 15px;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: #313131;
+          }
+        }
+      }
+    }
+    .text {
+      margin-left: 5px;
+      height: 100px;
+
+      textarea {
+        width: 100%;
+        height: 100px;
+        border: none;
+        font-size: 16px;
+        resize: none;
+        outline: none;
+      }
+    }
+    .image {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+      border: 3px solid #1d3a5f;
+      border-radius: 5px;
+      position: relative;
+
+      svg {
+        position: absolute;
+        color: white;
+        background-color: #313131ad;
+        padding: 5px;
+        border-radius: 50%;
+        right: 10px;
+        top: 10px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: #313131;
+        }
+      }
+      img {
+        width: 100%;
+        height: 100%;
+        object-position: center;
+        object-fit: contain;
+      }
+    }
+    .tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-left: 5px;
+      svg {
+        color: #1d3a5f;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .submit {
+        span {
+          display: flex;
+          justify-content: center;
+          width: 70px;
+          background-color: #1d3a5f;
+          padding: 10px;
+          color: white;
+          border-radius: 30px;
+          cursor: pointer;
+          transition: 0.3s;
+          &:hover {
+            background-color: #1d3a5fd5;
+          }
+        }
+      }
+    }
+  }
+}

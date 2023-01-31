@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import CreatePost from './components/createPost/CreatePost';
 import MainLayout from './components/layout/MainLayout';
-import { auth } from './firebase';
 import { useAuth } from './hooks/use-auth';
 import Home from './pages/home/Home';
 import Profile from './pages/profile/Profile';
@@ -21,7 +21,6 @@ const App: React.FC = () => {
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
-
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
       </Route>
