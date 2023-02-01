@@ -10,7 +10,7 @@ interface ProfileCoverType {
 }
 const ProfileCover: React.FC<ProfileCoverType> = ({ id }) => {
   const uploadCoverImage = useUserCoverImageUpload();
-  const { loading, userData } = useUserData(auth.currentUser?.uid);
+  const { loading, userData } = useUserData(id ? id : auth.currentUser?.uid);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {

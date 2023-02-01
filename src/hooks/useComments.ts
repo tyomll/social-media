@@ -1,8 +1,9 @@
 import React from 'react'
 import { CommentDataType } from './../types/commentData.type';
 import { uuidv4 } from "@firebase/util";
-import { collection, addDoc, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { collection, addDoc, onSnapshot, orderBy, query, where, deleteDoc, doc } from "firebase/firestore";
 import { db, auth } from "../firebase";
+import swal from 'sweetalert';
 
 export const useComments = (id?: string, comment?: string, setComment?: (arg: string) => void) => {
   const [comments, setComments] = React.useState<CommentDataType[]>()
@@ -36,5 +37,30 @@ export const useComments = (id?: string, comment?: string, setComment?: (arg: st
       setComments(dataa)
     })
   }
-  return { comments, getComments, onAddComment: onAddComment }
+  function deleteComment(commentId: string) {
+    const commentRef = doc(db, 'comments', commentId)
+    swal({
+      title: "Are you sure?",
+      text: "Once deleted this comment, you will not be able to recover it.",
+      icon: "warning",
+      dangerMode: true,
+    })
+      .then(async (willDelete) => {
+        if (willDelete) {
+          await deleteDoc(commentRef).then(() => {
+            swal("Poof! Your comment has been deleted!", {
+              icon: "success",
+            });
+          }).catch((e) => {
+            swal(e.message, {
+              icon: "error",
+            });
+          })
+
+        }
+      });
+
+  }
+
+  return { comments, getComments, onAddComment: onAddComment, deleteComment }
 }

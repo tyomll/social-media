@@ -3,6 +3,8 @@
   width: 100%;
   gap: 10px;
   align-items: flex-start;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.179);
   .avatar {
     width: 50px;
   }
@@ -14,16 +16,33 @@
       h4 {
         color: #1d3a5f;
       }
+
       span {
         font-size: 13px;
         color: rgb(145, 164, 191);
       }
     }
     .commentText {
-      word-break: break-all;
+      display: flex;
+      justify-content: space-between;
       margin-top: 5px;
-      color: #1d3a5f;
-      font-size: 15px;
+      width: 100%;
+      gap: 10px;
+      span {
+        word-break: break-all;
+        color: #1d3a5f;
+        font-size: 15px;
+      }
+      svg {
+        width: 15px;
+        height: 15px;
+        color: #1d3a5f;
+        cursor: pointer;
+        transition: 0.3s;
+        &:hover {
+          color: #030f1f;
+        }
+      }
     }
   }
 }

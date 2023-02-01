@@ -1,5 +1,6 @@
-import { PostDataType } from './../types/postData.type';
 import React from 'react'
+
+import { PostDataType } from './../types/postData.type';
 import { collection, addDoc, onSnapshot, query, orderBy, where, } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { uuidv4 } from '@firebase/util';
@@ -42,7 +43,6 @@ export const usePost = () => {
     }
   }
 
-
   const getPosts = async () => {
     const q = query(collection(db, "posts"), orderBy('date', 'desc'));
     onSnapshot(q, (data) => {
@@ -59,5 +59,3 @@ export const usePost = () => {
   }
   return { posts, getUserPosts, getPosts, uploadPost }
 }
-
-

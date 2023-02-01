@@ -17,7 +17,7 @@ const Home: React.FC = () => {
     <div className={s.root}>
       {createPostMode && <CreatePost setCreatePostMode={setCreatePostMode} />}
       <div className={s.container}>
-        <div className={s.createPost}>
+        <div className={s.createPost} onClick={() => setCreatePostMode(true)}>
           <div className={s.avatar}>
             <Avatar />
           </div>
