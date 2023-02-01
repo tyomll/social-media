@@ -1,0 +1,29 @@
+.root {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  align-items: flex-start;
+  .avatar {
+    width: 50px;
+  }
+  .commentDetails {
+    width: 100%;
+    .info {
+      display: flex;
+      justify-content: space-between;
+      h4 {
+        color: #1d3a5f;
+      }
+      span {
+        font-size: 13px;
+        color: rgb(145, 164, 191);
+      }
+    }
+    .commentText {
+      word-break: break-all;
+      margin-top: 5px;
+      color: #1d3a5f;
+      font-size: 15px;
+    }
+  }
+}

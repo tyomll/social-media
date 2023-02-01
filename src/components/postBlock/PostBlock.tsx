@@ -7,13 +7,18 @@ import s from './PostBlock.module.scss';
 import { faComment, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { auth } from '../../firebase';
 import { onLike } from '../../utils/onLike';
+import CommentsList from '../commentsList/CommentsList';
+import CreateComment from '../createComment/CreateComment';
 
 const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, likes }) => {
   const { userData } = useUserData(author.id);
-  const [isPostLiked, setIsPostLiked] = React.useState(likes.includes(auth.currentUser!.uid));
+  const [commentMode, setCommentMode] = React.useState<boolean>(false);
+  const [isPostLiked, setIsPostLiked] = React.useState<boolean>();
 
   React.useEffect(() => {
-    setIsPostLiked(likes.includes(auth.currentUser!.uid));
+    if (auth.currentUser !== null) {
+      setIsPostLiked(likes.includes(auth.currentUser!.uid));
+    }
   }, [likes]);
 
   return (
@@ -30,17 +35,36 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
         <img src={image} alt="post" />
       </div>
       <div className={s.actions}>
-        <div className={s.like} onClick={() => onLike(id, auth.currentUser!.uid, isPostLiked)}>
+        <div className={s.like}>
           <FontAwesomeIcon
+            onClick={() => onLike(id, auth.currentUser!.uid, isPostLiked!)}
             icon={faHeart}
             style={{ color: isPostLiked ? 'rgba(189, 9, 9, 0.979)' : '' }}
           />
           <span>{likes.length}</span>
         </div>
         <div className={s.comment}>
-          <FontAwesomeIcon icon={faComment} />
+          <FontAwesomeIcon
+            icon={faComment}
+            style={{ color: commentMode ? '#1d3a5f' : '' }}
+            onClick={() => {
+              if (commentMode === false) {
+                setCommentMode(true);
+              } else {
+                setCommentMode(false);
+              }
+            }}
+          />
         </div>
       </div>
+      {commentMode && (
+        <div className={s.commentsSection}>
+          <CreateComment postID={id} />
+          <div className={s.comments}>
+            <CommentsList postID={id} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

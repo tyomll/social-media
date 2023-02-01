@@ -6,11 +6,12 @@ import { auth } from '../../firebase';
 import { useUserData } from '../../hooks/useUsers';
 
 interface AvatarType {
+  id?: string;
   setAvatarUploadMode?: (arg: boolean) => void;
 }
 
-const Avatar: React.FC<AvatarType> = ({ setAvatarUploadMode }) => {
-  const { loading, userData } = useUserData(auth.currentUser?.uid);
+const Avatar: React.FC<AvatarType> = ({ id, setAvatarUploadMode }) => {
+  const { loading, userData } = useUserData(id ? id : auth.currentUser?.uid);
 
   if (loading) {
     return <>loading...</>;

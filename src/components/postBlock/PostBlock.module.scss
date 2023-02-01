@@ -6,7 +6,9 @@
   padding: 20px;
   transition: 0.5s;
   gap: 20px;
-
+  -webkit-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
   .author {
     display: flex;
     align-items: center;
@@ -63,7 +65,7 @@
         cursor: pointer;
         transition: 0.2s ease-in-out;
         &:hover {
-          color: rgba(189, 9, 9, 0.979);
+          scale: 1.2;
         }
       }
       span {
@@ -79,8 +81,21 @@
         transition: 0.2s ease-in-out;
         &:hover {
           color: #1d3a5f;
+          scale: 1.2;
         }
       }
+    }
+  }
+  .commentsSection {
+    padding-top: 10px;
+
+    .comments {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      padding-top: 15px;
+      border-top: 2px solid #1d3a5f20;
+      gap: 20px;
     }
   }
 }

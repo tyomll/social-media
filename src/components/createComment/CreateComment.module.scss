@@ -1,0 +1,39 @@
+.writeComment {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 20px;
+
+  .avatar {
+    width: 50px;
+  }
+
+  .input {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 50px);
+    padding: 10px;
+    border: 1px solid #1d3a5f20;
+    border-radius: 5px;
+    transition: 0.3s;
+
+    &:hover {
+      border: 1px solid #1d3a5f57;
+    }
+    input {
+      outline: none;
+      border: none;
+      width: 95%;
+      &::placeholder {
+        color: rgb(145, 164, 191);
+      }
+    }
+    svg {
+      color: #1d3a5f;
+      width: 20px;
+      height: 20px;
+      width: 5%;
+      cursor: pointer;
+    }
+  }
+}
