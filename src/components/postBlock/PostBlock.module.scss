@@ -20,8 +20,11 @@
       cursor: pointer;
     }
     .authorInfo {
-      h4 {
-        color: #1d3a5f;
+      a {
+        text-decoration: none;
+        h4 {
+          color: #1d3a5f;
+        }
       }
       span {
         font-weight: 400;

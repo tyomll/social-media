@@ -21,7 +21,7 @@ const UploadAvatarModal: React.FC<UploadAvatarModalType> = ({ setAvatarUploadMod
   function onClose() {
     setAvatar(null);
   }
-  function onCrop(preview: any) {
+  function onCrop(preview: string) {
     setAvatar(preview);
   }
 

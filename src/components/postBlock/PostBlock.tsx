@@ -9,6 +9,7 @@ import { auth } from '../../firebase';
 import { onLike } from '../../utils/onLike';
 import CommentsList from '../commentsList/CommentsList';
 import CreateComment from '../createComment/CreateComment';
+import { Link } from 'react-router-dom';
 
 const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, likes }) => {
   const { userData } = useUserData(author.id);
@@ -24,9 +25,13 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
   return (
     <div className={s.post}>
       <div className={s.author}>
-        <img src={userData?.avatar} alt="avatar" />
+        <Link to={`/users/${userData?.id}`}>
+          <img src={userData?.avatar} alt="avatar" />
+        </Link>
         <div className={s.authorInfo}>
-          <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
+          <Link to={`/users/${userData?.id}`}>
+            <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
+          </Link>
           <span>{formatDistanceToNow(date)} ago</span>
         </div>
       </div>

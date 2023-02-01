@@ -5,26 +5,29 @@ import PostList from '../../components/postList/PostList';
 import UploadAvatarModal from '../../components/uploadAvatarModal/UploadAvatarModal';
 import Avatar from '../../components/avatar/Avatar';
 import s from './Profile.module.scss';
-import ProfileCover from '../../components/profileCover/ProfileBanner';
+import ProfileCover from '../../components/profileCover/ProfileCover';
+import { useParams } from 'react-router-dom';
 
-const Profile = () => {
-  const { loading, userData } = useUserData(auth.currentUser?.uid);
+const Profile: React.FC = () => {
+  const { id } = useParams();
+  const { loading, userData } = useUserData(id);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
 
   if (loading) {
     return <>loading...</>;
   }
+
   return (
     <div className={s.root} style={{ overflow: 'disabled' }}>
       {avatarUploadMode && <UploadAvatarModal setAvatarUploadMode={setAvatarUploadMode} />}
       <div className={s.container}>
         <div className={s.user}>
           <div className={s.banner}>
-            <ProfileCover />
+            <ProfileCover id={id} />
           </div>
           <div className={s.info}>
             <div className={s.avatar}>
-              <Avatar setAvatarUploadMode={setAvatarUploadMode} />
+              <Avatar id={id} setAvatarUploadMode={setAvatarUploadMode} />
             </div>
             <div className={s.details}>
               <div className={s.userData}>

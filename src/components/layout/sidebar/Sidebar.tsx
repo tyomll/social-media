@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
     <div className={s.root}>
       <div className={s.container}>
         <div className={s.currentUser}>
-          <Link to="profile">
+          <Link to={`/users/${auth.currentUser?.uid}`}>
             <Avatar />
           </Link>
           <div className={s.userInfo}>

@@ -1,10 +1,11 @@
 import { formatDistanceToNow } from 'date-fns';
 import React from 'react';
 import { useUserData } from '../../hooks/useUsers';
+import { CommentDataType } from '../../types/commentData.type';
 import Avatar from '../avatar/Avatar';
 import s from './CommentBlock.module.scss';
 
-const CommentBlock: React.FC = ({ author, comment, date }: any) => {
+const CommentBlock: React.FC<CommentDataType> = ({ author, comment, date }) => {
   const { userData } = useUserData(author.id);
   return (
     <div className={s.root}>

@@ -5,8 +5,8 @@ import { UserDataType } from "../types/userData.type";
 import { ref, uploadString, getDownloadURL, uploadBytes } from "firebase/storage";
 
 export const useUserData = (id: string | undefined) => {
-  const [userData, setUserData] = React.useState<DocumentData | UserDataType>();
   const [loading, setLoading] = React.useState<boolean>(true)
+  const [userData, setUserData] = React.useState<DocumentData | UserDataType>();
 
   async function getUserDataById() {
     if (id) {

@@ -2,12 +2,13 @@ import React from 'react';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './ProfileCover.module.scss';
-import { useLocation } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { useUserCoverImageUpload, useUserData } from '../../hooks/useUsers';
 
-const ProfileCover: React.FC = () => {
-  const location = useLocation();
+interface ProfileCoverType {
+  id?: string;
+}
+const ProfileCover: React.FC<ProfileCoverType> = ({ id }) => {
   const uploadCoverImage = useUserCoverImageUpload();
   const { loading, userData } = useUserData(auth.currentUser?.uid);
 
@@ -25,7 +26,7 @@ const ProfileCover: React.FC = () => {
   return (
     <div className={s.banner}>
       <img src={userData?.coverImage} />
-      {location.pathname === '/profile' && (
+      {id === auth.currentUser?.uid && (
         <label htmlFor="uploadCover">
           <FontAwesomeIcon icon={faCamera} />
           Edit Cover

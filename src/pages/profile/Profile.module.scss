@@ -66,8 +66,11 @@
       }
     }
     .posts {
+      display: flex;
+      flex-direction: column;
       padding: 20px;
       border-radius: 15px;
+      gap: 30px;
       h2 {
         margin-left: 20px;
         color: #1d3a5f;

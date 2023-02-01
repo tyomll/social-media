@@ -11,6 +11,7 @@ import { useAuth } from '../../../hooks/use-auth';
 import { Link } from 'react-router-dom';
 import Avatar from '../../avatar/Avatar';
 import CreatePost from '../../createPost/CreatePost';
+import { auth } from '../../../firebase';
 
 const Header: React.FC = () => {
   const { isAuth } = useAuth();
@@ -62,7 +63,7 @@ const Header: React.FC = () => {
                   <span>Create</span>
                 </div>
                 <div className={s.avatar}>
-                  <Link to="/profile">
+                  <Link to={`/users/${auth.currentUser?.uid}`}>
                     <Avatar />
                   </Link>
                 </div>

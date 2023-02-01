@@ -1,10 +1,11 @@
 import React from 'react'
+import { CommentDataType } from './../types/commentData.type';
 import { uuidv4 } from "@firebase/util";
 import { collection, addDoc, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db, auth } from "../firebase";
 
 export const useComments = (id?: string, comment?: string, setComment?: (arg: string) => void) => {
-  const [comments, setComments] = React.useState<any>()
+  const [comments, setComments] = React.useState<CommentDataType[]>()
 
   async function onAddComment() {
     if (comment) {

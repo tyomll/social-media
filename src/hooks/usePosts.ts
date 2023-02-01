@@ -7,7 +7,7 @@ import { auth, db, storage } from "../firebase";
 
 interface IncomingPostType {
   text: string,
-  image: File
+  image: File | undefined;
 }
 export const usePost = () => {
   const [posts, setPosts] = React.useState<PostDataType[]>()

@@ -1,11 +1,11 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import { auth } from '../../firebase';
+import { useLocation, useParams } from 'react-router-dom';
 import { usePost } from '../../hooks/usePosts';
 import { PostDataType } from '../../types/postData.type';
 import PostBlock from '../postBlock/PostBlock';
 
 const PostList: React.FC = () => {
+  const { id } = useParams();
   const location = useLocation();
   const { posts, getPosts, getUserPosts } = usePost();
 
@@ -14,10 +14,10 @@ const PostList: React.FC = () => {
       if (location.pathname === '/') {
         await getPosts();
       } else {
-        await getUserPosts(auth.currentUser!.uid);
+        await getUserPosts(id!);
       }
     })();
-  }, []);
+  }, [id]);
 
   if (!posts) {
     return <>loading</>;

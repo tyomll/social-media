@@ -20,7 +20,7 @@ const Avatar: React.FC<AvatarType> = ({ id, setAvatarUploadMode }) => {
   return (
     <div className={s.avatar}>
       <img src={userData?.avatar} alt="avatar" />
-      {setAvatarUploadMode && (
+      {id === auth.currentUser?.uid && setAvatarUploadMode && (
         <div className={s.avatarChange} onClick={() => setAvatarUploadMode(true)}>
           <FontAwesomeIcon icon={faCamera} />
         </div>
