@@ -32,29 +32,6 @@
       display: flex;
       align-items: center;
       gap: 30px;
-      .search {
-        display: flex;
-        background-color: #f4f5f8;
-        padding: 15px;
-        border-radius: 10px;
-        padding-right: 60px;
-        gap: 10px;
-
-        svg {
-          color: #bfc7d2;
-          width: 15px;
-          height: 15px;
-        }
-        input {
-          background-color: inherit;
-          outline: none;
-          border: none;
-
-          &::placeholder {
-            color: #bfc7d2;
-          }
-        }
-      }
     }
     .create {
       display: flex;

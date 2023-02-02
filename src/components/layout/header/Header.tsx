@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import Avatar from '../../avatar/Avatar';
 import CreatePost from '../../createPost/CreatePost';
 import { auth } from '../../../firebase';
+import Searchbar from '../../searchbar/Searchbar';
 
 const Header: React.FC = () => {
   const { isAuth } = useAuth();
@@ -52,10 +53,8 @@ const Header: React.FC = () => {
             </Link>
           </div>
           <div className={s.actions}>
-            <div className={s.search}>
-              <FontAwesomeIcon icon={faSearch} />
-              <input type="text" placeholder="Search..." />
-            </div>
+            <Searchbar />
+
             {isAuth ? (
               <>
                 <div className={s.create} onClick={() => setCreatePostMode(true)}>
