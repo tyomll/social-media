@@ -35,14 +35,15 @@ const SignIn: React.FC = () => {
     createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
       const ref = doc(db, 'users', user.uid);
       await setDoc(ref, {
-        avatar: defaultAvatar,
         id: user.uid,
+        email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
-        createdAt: Date.now().toString(),
         username: data.username,
-        email: data.email,
+        avatar: defaultAvatar,
         coverImage: defaultCoverImage,
+        createdAt: Date.now().toString(),
+        friends: [],
       });
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {

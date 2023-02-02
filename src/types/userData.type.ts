@@ -7,4 +7,6 @@ export interface UserDataType {
   email: string,
   createdAt: string,
   username: string
+  friends: string[]
+  friendRequests?: string[]
 }

@@ -36,6 +36,12 @@
         }
       }
       .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fff;
+        border: 1px solid rgba(128, 128, 128, 0.102);
+
         .avatar {
           position: absolute;
           left: 30px;
@@ -45,10 +51,7 @@
         }
         .details {
           display: flex;
-          background-color: #fff;
-          width: 100%;
           height: 100px;
-          border: 1px solid rgba(128, 128, 128, 0.102);
           padding-left: 180px;
           padding-top: 20px;
           .userData {
@@ -60,6 +63,25 @@
             }
             span {
               color: rgb(145, 164, 191);
+            }
+          }
+        }
+        .addFriend {
+          margin-right: 30px;
+          span {
+            display: flex;
+            align-items: center;
+            background-color: #1877f2;
+            padding: 10px;
+            gap: 5px;
+            word-break: unset;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+            &:hover {
+              scale: 1.02;
             }
           }
         }
