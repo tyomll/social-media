@@ -30,23 +30,34 @@ const Searchbar: React.FC = () => {
         />
       </div>
       <div className={s.results}>
-        <ul>
-          {users?.map((user) => {
-            if (user.id !== auth.currentUser?.uid) {
-              return (
-                <li className={s.user} key={user.id}>
-                  <div className={s.avatar}>
-                    <Avatar id={user.id} />
-                  </div>
-                  <div className={s.info}>
-                    <h4>{user.firstName + ' ' + user.lastName}</h4>
-                    <span>@{user.username}</span>
-                  </div>
-                </li>
-              );
-            }
-          })}
-        </ul>
+        {input.length > 0 && users && (
+          <ul>
+            {users?.map((user) => {
+              if (user.id !== auth.currentUser?.uid) {
+                return (
+                  <li className={s.user} key={user.id}>
+                    <div className={s.avatar}>
+                      <Avatar id={user.id} />
+                    </div>
+                    <div className={s.info}>
+                      <h4>{user.firstName + ' ' + user.lastName}</h4>
+                      <span>@{user.username}</span>
+                    </div>
+                  </li>
+                );
+              }
+            })}
+          </ul>
+        )}
+        {input.length > 0 && users?.length === 0 && (
+          <ul>
+            <li className={s.user}>
+              <div className={s.info}>
+                <h4>Nothing found</h4>
+              </div>
+            </li>
+          </ul>
+        )}
       </div>
     </div>
   );
