@@ -2,6 +2,7 @@ import React from 'react';
 import { auth } from '../../firebase';
 import { useUserData } from '../../hooks/useUsers';
 import { onAcceptFriend } from '../../utils/onAcceptFriend';
+import { onDeclineFriendRequest } from '../../utils/onDeclineFriendRequest';
 import Avatar from '../avatar/Avatar';
 import s from './Request.module.scss';
 
@@ -15,6 +16,9 @@ const Request: React.FC<RequestType> = ({ id }) => {
     await onAcceptFriend(auth.currentUser!.uid, id);
   }
 
+  function handleDecline() {
+    onDeclineFriendRequest(id, auth.currentUser!.uid);
+  }
   return (
     <div className={s.root}>
       <div className={s.request}>
@@ -31,7 +35,9 @@ const Request: React.FC<RequestType> = ({ id }) => {
           <span className={s.accept} onClick={handleAccept}>
             Accept
           </span>
-          <span className={s.decline}>Decline</span>
+          <span className={s.decline} onClick={handleDecline}>
+            Decline
+          </span>
         </div>
       </div>
     </div>

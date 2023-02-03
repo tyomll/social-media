@@ -33,10 +33,9 @@ const Profile: React.FC = () => {
   async function handleFriendRemove() {
     await onRemoveFriend(id!, auth.currentUser!.uid);
   }
-  
+
   React.useEffect(() => {
     setIsFriendRequested(userData?.friendRequests.includes(auth.currentUser!.uid));
-
     setIsFriendAdded(userData?.friends.includes(auth.currentUser!.uid));
   }, [userData]);
 
