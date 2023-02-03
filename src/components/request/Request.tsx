@@ -10,11 +10,11 @@ interface RequestType {
 }
 const Request: React.FC<RequestType> = ({ id }) => {
   const { userData } = useUserData(id);
-  // const [isRequestAccepted, setIsRequestAccepted] = React.useState(false);
 
   async function handleAccept() {
     await onAcceptFriend(auth.currentUser!.uid, id);
   }
+
   return (
     <div className={s.root}>
       <div className={s.request}>
@@ -23,7 +23,8 @@ const Request: React.FC<RequestType> = ({ id }) => {
             <Avatar id={userData?.id} />
           </div>
           <h4>
-            Gago Dzya <span>wants to add you to friends</span>
+            {userData?.firstName + ' ' + userData?.lastName}{' '}
+            <span>wants to add you to friends</span>
           </h4>
         </div>
         <div className={s.actions}>

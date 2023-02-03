@@ -7,4 +7,5 @@ export async function onAddFriend(id: string, userID: string, isFriendAdded: boo
   await updateDoc(userRef, {
     friendRequests: isFriendAdded ? arrayRemove(userID) : arrayUnion(userID),
   });
+
 }

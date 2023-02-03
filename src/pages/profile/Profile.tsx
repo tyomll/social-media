@@ -7,25 +7,38 @@ import s from './Profile.module.scss';
 import ProfileCover from '../../components/profileCover/ProfileCover';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglass, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { faHourglass, faUserCheck, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { auth } from '../../firebase';
 import { onAddFriend } from '../../utils/onAddFriend';
+import { onRemoveFriend } from '../../utils/onRemoveFriend';
 
 const Profile: React.FC = () => {
   const { id } = useParams();
   const { loading, userData } = useUserData(id);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
-  const [isFriendAdded, setIsFriendAdded] = React.useState(false);
+  const [isFriendRequested, setIsFriendRequested] = React.useState(
+    userData?.friendRequests.includes(auth.currentUser!.uid),
+  );
+  const [isFriendAdded, setIsFriendAdded] = React.useState(
+    userData?.friends.includes(auth.currentUser!.uid),
+  );
 
   async function handleFriendAdd() {
-    if (!isFriendAdded) {
-      setIsFriendAdded(true);
-      await onAddFriend(id!, auth.currentUser!.uid, isFriendAdded);
+    if (!isFriendRequested) {
+      await onAddFriend(id!, auth.currentUser!.uid, isFriendRequested);
     } else {
-      setIsFriendAdded(false);
-      await onAddFriend(id!, auth.currentUser!.uid, isFriendAdded);
+      await onAddFriend(id!, auth.currentUser!.uid, isFriendRequested);
     }
   }
+  async function handleFriendRemove() {
+    await onRemoveFriend(id!, auth.currentUser!.uid);
+  }
+  
+  React.useEffect(() => {
+    setIsFriendRequested(userData?.friendRequests.includes(auth.currentUser!.uid));
+
+    setIsFriendAdded(userData?.friends.includes(auth.currentUser!.uid));
+  }, [userData]);
 
   if (loading) {
     return <>loading...</>;
@@ -49,19 +62,32 @@ const Profile: React.FC = () => {
                 <span>{'@' + userData?.username}</span>
               </div>
             </div>
-            <div className={s.addFriend}>
-              {!isFriendAdded ? (
-                <span onClick={handleFriendAdd}>
-                  <FontAwesomeIcon icon={faUserPlus} />
-                  Add friend
-                </span>
+            {!isFriendAdded ? (
+              auth.currentUser?.uid !== id ? (
+                <div className={s.addFriend}>
+                  {!isFriendRequested ? (
+                    <span onClick={handleFriendAdd}>
+                      <FontAwesomeIcon icon={faUserPlus} />
+                      Add friend
+                    </span>
+                  ) : (
+                    <span onClick={handleFriendAdd} style={{ backgroundColor: '#458b3d' }}>
+                      <FontAwesomeIcon icon={faHourglass} />
+                      Requested
+                    </span>
+                  )}
+                </div>
               ) : (
-                <span onClick={handleFriendAdd} style={{ backgroundColor: '#458b3d' }}>
-                  <FontAwesomeIcon icon={faHourglass} />
-                  Requested
+                <></>
+              )
+            ) : (
+              <div className={s.addFriend}>
+                <span onClick={handleFriendRemove}>
+                  <FontAwesomeIcon icon={faUserCheck} />
+                  Friends
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </div>
         <div className={s.posts}>

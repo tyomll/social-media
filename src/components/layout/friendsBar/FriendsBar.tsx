@@ -3,6 +3,7 @@ import { auth } from '../../../firebase';
 import { useUserData } from '../../../hooks/useUsers';
 import Request from '../../request/Request';
 import s from './FriendsBar.module.scss';
+import FriendsList from './friendsList/FriendsList';
 
 const FriendsBar: React.FC = () => {
   const { userData } = useUserData(auth.currentUser?.uid);
@@ -13,7 +14,7 @@ const FriendsBar: React.FC = () => {
         {userData?.friendRequests ? (
           <>
             <div className={s.header}>
-              <h4>Requests</h4>
+              <h4>REQUESTS</h4>
               <span>{userData?.friendRequests.length}</span>
             </div>
             <div className={s.requests}>
@@ -35,27 +36,7 @@ const FriendsBar: React.FC = () => {
           <span>{userData?.friends.length}</span>
         </div>
         <div className={s.friends}>
-          <div className={s.friend}>
-            <img
-              src="https://0.gravatar.com/avatar/fcfa3fc00f244f160aa0b363cb3d46e7?s=204&d=identicon&r=G"
-              alt="friend"
-            />
-            <h4>Gago Dzya</h4>
-          </div>
-          <div className={s.friend}>
-            <img
-              src="https://media.licdn.com/dms/image/C4D22AQHKKOMFM6DFhg/feedshare-shrink_1280/0/1674729900394?e=1677715200&v=beta&t=Ca6Q3f0jLcPH3aUrf2pMKEqOBijHLGyHC3-nRenYPis"
-              alt="friend"
-            />
-            <h4>Valod Pap</h4>
-          </div>
-          <div className={s.friend}>
-            <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMZwSWQPfhyX4RkPi5Z1y_LHEkuxhmJw8sVbNd6tLAT2bsEce6vAQGLXhi5TLexurO1PY&usqp=CAU"
-              alt="friend"
-            />
-            <h4>Ruzan Moqir</h4>
-          </div>
+          <FriendsList userData={userData} />
         </div>
       </div>
     </div>
