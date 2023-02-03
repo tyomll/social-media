@@ -14,6 +14,7 @@
       }
 
       h4 {
+        text-transform: capitalize;
         width: 80%;
         font-weight: 500;
         margin-top: 5px;
@@ -21,6 +22,7 @@
         font-size: 15px;
 
         span {
+          text-transform: lowercase;
           font-weight: 400;
         }
       }

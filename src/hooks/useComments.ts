@@ -44,6 +44,7 @@ export const useComments = (id?: string, comment?: string, setComment?: (arg: st
       text: "Once deleted this comment, you will not be able to recover it.",
       icon: "warning",
       dangerMode: true,
+      buttons: ['Cancel', 'Delete'],
     })
       .then(async (willDelete) => {
         if (willDelete) {

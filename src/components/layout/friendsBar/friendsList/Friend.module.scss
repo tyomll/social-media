@@ -1,30 +1,35 @@
 .friend {
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
+  .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 
-  .avatar {
-    a {
-      text-decoration: none;
+    .avatar {
+      a {
+        text-decoration: none;
 
-      img {
-        border-radius: 15px;
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
+        img {
+          border-radius: 15px;
+          width: 50px;
+          height: 50px;
+          cursor: pointer;
+        }
       }
     }
-  }
-  .details {
-    h4 {
-      font-weight: 500;
-      color: #1d3a5f;
-      cursor: pointer;
-      text-transform: capitalize;
-    }
-    span {
-      font-size: 15px;
-      color: rgb(145, 164, 191);
+    .details {
+      h4 {
+        font-weight: 500;
+        color: #1d3a5f;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+      span {
+        font-size: 15px;
+        color: rgb(145, 164, 191);
+      }
     }
   }
 }

@@ -10,11 +10,19 @@ import { onLike } from '../../utils/onLike';
 import CommentsList from '../commentsList/CommentsList';
 import CreateComment from '../createComment/CreateComment';
 import { Link } from 'react-router-dom';
+import { useComments } from '../../hooks/useComments';
 
 const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, likes }) => {
   const { userData } = useUserData(author.id);
   const [commentMode, setCommentMode] = React.useState<boolean>(false);
   const [isPostLiked, setIsPostLiked] = React.useState<boolean>();
+  const { comments, getComments } = useComments();
+
+  React.useEffect(() => {
+    (async () => {
+      await getComments(id);
+    })();
+  }, [comments]);
 
   React.useEffect(() => {
     if (auth.currentUser !== null) {
@@ -60,6 +68,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
               }
             }}
           />
+          <span>{comments?.length}</span>
         </div>
       </div>
       {commentMode && (

@@ -5,6 +5,7 @@ import s from './Searchbar.module.scss';
 import Avatar from '../avatar/Avatar';
 import { useSearch } from '../../hooks/useSearch';
 import { auth } from '../../firebase';
+import { Link } from 'react-router-dom';
 
 const Searchbar: React.FC = () => {
   const [input, setInput] = React.useState<string>('');
@@ -37,10 +38,15 @@ const Searchbar: React.FC = () => {
                 return (
                   <li className={s.user} key={user.id}>
                     <div className={s.avatar}>
-                      <Avatar id={user.id} />
+                      <Link to={`/users/${user.id}`}>
+                        <Avatar id={user.id} />
+                      </Link>
                     </div>
                     <div className={s.info}>
-                      <h4>{user.firstName + ' ' + user.lastName}</h4>
+                      <Link to={`/users/${user.id}`}>
+                        <h4>{user.firstName + ' ' + user.lastName}</h4>
+                      </Link>
+
                       <span>@{user.username}</span>
                     </div>
                   </li>

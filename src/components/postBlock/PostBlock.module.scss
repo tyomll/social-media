@@ -76,6 +76,9 @@
       }
     }
     .comment {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       svg {
         width: 25px;
         height: 25px;
@@ -86,6 +89,9 @@
           color: #1d3a5f;
           scale: 1.2;
         }
+      }
+      span {
+        font-weight: 500;
       }
     }
   }
