@@ -22,7 +22,7 @@ const MainLayout: React.FC = () => {
           <Outlet />
         ) : (
           <>
-            <Sidebar />
+            {location.pathname !== '/messenger' && <Sidebar />}
             <Outlet />
             {location.pathname !== '/profile' && <FriendsBar />}
           </>
