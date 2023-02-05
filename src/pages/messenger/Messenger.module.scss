@@ -9,7 +9,7 @@
     -webkit-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
     -moz-box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    
+
     .chatContainer {
       display: flex;
       flex-direction: column;
@@ -31,6 +31,7 @@
           align-items: center;
           gap: 10px;
           h4 {
+            text-transform: capitalize;
             color: #1d3a5f;
           }
           span {

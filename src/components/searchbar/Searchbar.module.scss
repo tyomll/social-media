@@ -6,7 +6,7 @@
     background-color: #f4f5f8;
     padding: 15px;
     border-radius: 10px;
-    padding-right: 60px;
+    padding-right: 30px;
     gap: 10px;
 
     svg {
@@ -15,6 +15,7 @@
       height: 15px;
     }
     input {
+      width: 100%;
       background-color: inherit;
       outline: none;
       border: none;

@@ -6,10 +6,13 @@
   .search {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: 90%;
     height: 50px;
     background-color: #f4f5f8;
-    padding: 15px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
     border-radius: 10px;
 
     input {
