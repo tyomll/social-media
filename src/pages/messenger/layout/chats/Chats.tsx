@@ -13,9 +13,11 @@ const Chats: React.FC = () => {
       <div className={s.search}>
         <Searchbar component="messenger" />
       </div>
-      {chats?.map((chat: ChatDataType) => {
-        return <Chat key={chat[0]} chat={chat} />;
-      })}
+      {chats
+        ?.sort((a, b) => b[1].date - a[1].date)
+        .map((chat: ChatDataType) => {
+          return <Chat key={chat[0]} chat={chat} />;
+        })}
     </div>
   );
 };

@@ -1,13 +1,15 @@
-import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import Avatar from '../../../../components/avatar/Avatar';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
+import { useMessages } from '../../../../hooks/useMessages';
 import { useUserData } from '../../../../hooks/useUsers';
 import s from '../../Messenger.module.scss';
+import Input from './Input';
+import Message from './Message';
 
 const Chat: React.FC = () => {
-  const userID = useAppSelector((state) => state.currentChat.id);
+  const messages = useMessages();
+  const userID = useAppSelector((state) => state.currentChat.userID);
   const { userData } = useUserData(userID!);
 
   return (
@@ -24,32 +26,12 @@ const Chat: React.FC = () => {
         </div>
       )}
       <div className={s.chat}>
-        <div className={s.message}>
-          <div className={s.avatar}>
-            <Avatar />
-          </div>
-          <div className={s.text}>
-            <span>Hellodsadasdasd</span>
-          </div>
-        </div>
-        <div
-          className={s.message}
-          style={{ justifyContent: 'flex-start', flexDirection: 'row-reverse' }}>
-          <div className={s.avatar}>
-            <Avatar />
-          </div>
-          <div className={s.text}>
-            <span>asdliahsdjsaghdji</span>
-          </div>
-        </div>
+        {messages?.map((m: any) => {
+          return <Message key={m.id} message={m} />;
+        })}
       </div>
       <div className={s.messageInput}>
-        <div className={s.input}>
-          <input type="text" placeholder="Write something..." />
-          <span>
-            <FontAwesomeIcon icon={faPaperPlane} />
-          </span>
-        </div>
+        <Input />
       </div>
     </div>
   );

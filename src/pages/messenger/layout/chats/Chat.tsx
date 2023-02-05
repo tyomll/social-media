@@ -11,7 +11,7 @@ interface ChatType {
 }
 const Chat: React.FC<ChatType> = ({ chat }) => {
   const { userData } = useUserData(chat[1].userInfo.id);
-  const userID = useAppSelector((state) => state.currentChat.id);
+  const userID = useAppSelector((state) => state.currentChat.userID);
   const dispatch = useAppDispatch();
 
   function handleSelectChat() {
@@ -27,7 +27,7 @@ const Chat: React.FC<ChatType> = ({ chat }) => {
       </div>
       <div className={s.details}>
         <h4>{`${userData?.firstName} ${userData?.lastName}`}</h4>
-        <span>This is my latest message</span>
+        <span>{chat[1].lastMessage?.text}</span>
       </div>
     </div>
   );
