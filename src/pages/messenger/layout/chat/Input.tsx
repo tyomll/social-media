@@ -18,7 +18,18 @@ const Input: React.FC = () => {
         type="text"
         value={message.text}
         placeholder="Write something..."
-        onChange={(e) => setMessage({ ...message, text: e.target.value })}
+        onChange={(e) => {
+          setMessage({ ...message, text: e.target.value });
+        }}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            onMessageSend(message, currentChat.userID, currentChat.chatID);
+            setMessage({
+              text: '',
+              image: '',
+            });
+          }
+        }}
       />
       <label htmlFor="file">
         <FontAwesomeIcon icon={faImage} />

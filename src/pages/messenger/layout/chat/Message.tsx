@@ -8,8 +8,16 @@ interface MessageType {
 }
 
 const Message: React.FC<MessageType> = ({ message }) => {
+  const ref = React.useRef<any>(null);
+
+  React.useEffect(() => {
+    if (ref) {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [message]);
   return (
     <div
+      ref={ref}
       className={s.message}
       style={{
         flexDirection: message.senderID === auth.currentUser?.uid ? 'row-reverse' : undefined,
