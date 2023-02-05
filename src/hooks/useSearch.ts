@@ -18,6 +18,15 @@ export const useSearch = (input: string) => {
       setUsers([])
     }
   }
+
+  React.useEffect(() => {
+    if (input) {
+      (async () => {
+        await getSearchUser()
+      })()
+    }
+  }, [input])
+
   return { users, getSearchUser }
 }
 

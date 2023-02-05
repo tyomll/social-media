@@ -6,8 +6,12 @@ import Avatar from '../avatar/Avatar';
 import { useSearch } from '../../hooks/useSearch';
 import { auth } from '../../firebase';
 import { Link } from 'react-router-dom';
+import { onSelectChat } from '../../utils/onSelectChat';
 
-const Searchbar: React.FC = () => {
+interface SearchbarType {
+  component?: string;
+}
+const Searchbar: React.FC<SearchbarType> = ({ component }) => {
   const [input, setInput] = React.useState<string>('');
   const { users, getSearchUser } = useSearch(input);
 
@@ -36,16 +40,31 @@ const Searchbar: React.FC = () => {
             {users?.map((user) => {
               if (user.id !== auth.currentUser?.uid) {
                 return (
-                  <li className={s.user} key={user.id}>
+                  <li
+                    className={s.user}
+                    key={user.id}
+                    style={{ cursor: component === 'messenger' ? 'pointer' : '' }}
+                    onClick={() => {
+                      component === 'messenger' && onSelectChat(user.id);
+                      setInput('');
+                    }}>
                     <div className={s.avatar}>
-                      <Link to={`/users/${user.id}`}>
+                      {component !== 'messenger' ? (
+                        <Link to={`/users/${user.id}`}>
+                          <Avatar id={user.id} />
+                        </Link>
+                      ) : (
                         <Avatar id={user.id} />
-                      </Link>
+                      )}
                     </div>
                     <div className={s.info}>
-                      <Link to={`/users/${user.id}`}>
+                      {component !== 'messenger' ? (
+                        <Link to={`/users/${user.id}`}>
+                          <h4>{user.firstName + ' ' + user.lastName}</h4>
+                        </Link>
+                      ) : (
                         <h4>{user.firstName + ' ' + user.lastName}</h4>
-                      </Link>
+                      )}
 
                       <span>@{user.username}</span>
                     </div>

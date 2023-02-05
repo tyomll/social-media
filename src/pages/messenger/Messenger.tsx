@@ -1,33 +1,15 @@
-import { faPaperPlane, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from '../../components/avatar/Avatar';
 import s from './Messenger.module.scss';
+import Chats from './layout/chats/Chats';
 
 const Messenger: React.FC = () => {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <div className={s.chats}>
-          <div className={s.chat}>
-            <div className={s.avatar}>
-              <Avatar />
-            </div>
-            <div className={s.details}>
-              <h4>Gago Valodyan</h4>
-              <span>This is my latest message</span>
-            </div>
-          </div>
-          <div className={s.chat}>
-            <div className={s.avatar}>
-              <Avatar />
-            </div>
-            <div className={s.details}>
-              <h4>Gago Valodyan</h4>
-              <span>This is my latest message</span>
-            </div>
-          </div>
-        </div>
+        <Chats />
         <div className={s.chatContainer}>
           <div className={s.user}>
             <div className={s.avatar}>

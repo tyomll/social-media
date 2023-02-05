@@ -33,8 +33,9 @@ const SignIn: React.FC = () => {
 
   function handleRegister(data: AuthDataType) {
     createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
-      const ref = doc(db, 'users', user.uid);
-      await setDoc(ref, {
+      const usersRef = doc(db, 'users', user.uid);
+      const userChatsRef = doc(db, 'userChats', user.uid);
+      await setDoc(usersRef, {
         id: user.uid,
         email: data.email,
         firstName: data.firstName,
@@ -45,6 +46,7 @@ const SignIn: React.FC = () => {
         createdAt: Date.now().toString(),
         friends: [],
       });
+      await setDoc(userChatsRef, {});
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
           displayName: data.username,
