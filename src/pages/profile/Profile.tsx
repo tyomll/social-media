@@ -11,10 +11,14 @@ import { faHourglass, faUserCheck, faUserPlus } from '@fortawesome/free-solid-sv
 import { auth } from '../../firebase';
 import { onAddFriend } from '../../utils/onAddFriend';
 import { onRemoveFriend } from '../../utils/onRemoveFriend';
+import FriendsList from '../../components/layout/friendsBar/friendsList/FriendsList';
+
+const sections = ['Posts', 'Friends'];
 
 const Profile: React.FC = () => {
   const { id } = useParams();
   const { loading, userData } = useUserData(id);
+  const [sectionIndex, setSectionIndex] = React.useState(0);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
   const [isFriendRequested, setIsFriendRequested] = React.useState(
     userData?.friendRequests && userData.friendRequests.includes(auth.currentUser!.uid),
@@ -91,9 +95,27 @@ const Profile: React.FC = () => {
             )}
           </div>
         </div>
+        <div className={s.sections}>
+          {sections.map((section, i) => {
+            return (
+              <span
+                style={{ color: sectionIndex === i ? '#1877f2' : '' }}
+                onClick={() => setSectionIndex(i)}>
+                {section}
+              </span>
+            );
+          })}
+        </div>
         <div className={s.posts}>
-          <h2>{userData?.firstName}'s posts</h2>
-          <PostList />
+          <h2>
+            {userData?.firstName}'s {sections[sectionIndex].toLowerCase()}
+          </h2>
+          {sections[sectionIndex].toLowerCase() === 'posts' && <PostList />}
+          {sections[sectionIndex].toLowerCase() === 'friends' && (
+            <div className={s.friends}>
+              <FriendsList userData={userData} />
+            </div>
+          )}
         </div>
       </div>
     </div>

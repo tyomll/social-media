@@ -2,14 +2,16 @@ import React from 'react';
 import { useUserData } from '../../../../hooks/useUsers';
 import Avatar from '../../../avatar/Avatar';
 import s from './Friend.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import ThreeDotsDropdown from '../../../threeDotsDropdown/ThreeDotsDropdown';
+import { auth } from '../../../../firebase';
 
 interface FriendType {
   friendID: string;
 }
 const Friend: React.FC<FriendType> = ({ friendID }) => {
   const { userData } = useUserData(friendID);
+  const location = useLocation();
 
   return (
     <div className={s.friend}>
@@ -26,9 +28,11 @@ const Friend: React.FC<FriendType> = ({ friendID }) => {
           <span>@{userData?.username}</span>
         </div>
       </div>
-      <div className={s.dots}>
-        <ThreeDotsDropdown friendID={friendID} />
-      </div>
+      {location.pathname.includes(auth.currentUser!.uid) && (
+        <div className={s.dots}>
+          <ThreeDotsDropdown friendID={friendID} />
+        </div>
+      )}
     </div>
   );
 };
