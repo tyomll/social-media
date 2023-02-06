@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from '../avatar/Avatar';
 import s from './CreateComment.module.scss';
 import { useComments } from '../../hooks/useComments';
+import { auth } from '../../firebase';
 
 interface CreateCommentType {
   postID: string;
@@ -19,7 +20,7 @@ const CreateComment: React.FC<CreateCommentType> = ({ postID }) => {
   return (
     <div className={s.writeComment}>
       <div className={s.avatar}>
-        <Avatar />
+        <Avatar id={auth.currentUser!.uid} />
       </div>
       <div className={s.input}>
         <input

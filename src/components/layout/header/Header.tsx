@@ -63,7 +63,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className={s.avatar}>
                   <Link to={`/users/${auth.currentUser?.uid}`}>
-                    <Avatar />
+                    <Avatar id={auth.currentUser!.uid} />
                   </Link>
                 </div>
               </>

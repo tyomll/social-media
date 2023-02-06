@@ -19,7 +19,7 @@ const Home: React.FC = () => {
       <div className={s.container}>
         <div className={s.createPost} onClick={() => setCreatePostMode(true)}>
           <div className={s.avatar}>
-            <Avatar />
+            <Avatar id={auth.currentUser!.uid} />
           </div>
           <span>What's new {userData.firstName}?</span>
         </div>

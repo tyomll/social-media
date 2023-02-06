@@ -11,7 +11,7 @@ interface AvatarType {
 }
 
 const Avatar: React.FC<AvatarType> = ({ id, setAvatarUploadMode }) => {
-  const { loading, userData } = useUserData(id ? id : auth.currentUser?.uid);
+  const { loading, userData } = useUserData(id);
 
   if (loading) {
     return <>loading...</>;

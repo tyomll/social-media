@@ -17,10 +17,10 @@ const Profile: React.FC = () => {
   const { loading, userData } = useUserData(id);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
   const [isFriendRequested, setIsFriendRequested] = React.useState(
-    userData?.friendRequests.includes(auth.currentUser!.uid),
+    userData?.friendRequests && userData.friendRequests.includes(auth.currentUser!.uid),
   );
   const [isFriendAdded, setIsFriendAdded] = React.useState(
-    userData?.friends.includes(auth.currentUser!.uid),
+    userData?.friendRequests && userData.friends.includes(auth.currentUser!.uid),
   );
 
   async function handleFriendAdd() {
@@ -35,8 +35,10 @@ const Profile: React.FC = () => {
   }
 
   React.useEffect(() => {
-    setIsFriendRequested(userData?.friendRequests.includes(auth.currentUser!.uid));
-    setIsFriendAdded(userData?.friends.includes(auth.currentUser!.uid));
+    setIsFriendRequested(
+      userData?.friendRequests && userData?.friendRequests.includes(auth.currentUser!.uid),
+    );
+    setIsFriendAdded(userData?.friendRequests && userData?.friends.includes(auth.currentUser!.uid));
   }, [userData]);
 
   if (loading) {

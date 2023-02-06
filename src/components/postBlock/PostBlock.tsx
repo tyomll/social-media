@@ -11,11 +11,13 @@ import CommentsList from '../commentsList/CommentsList';
 import CreateComment from '../createComment/CreateComment';
 import { Link } from 'react-router-dom';
 import { useComments } from '../../hooks/useComments';
+import PhotoViewer from '../photoViewer/PhotoViewer';
 
 const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, likes }) => {
   const { userData } = useUserData(author.id);
   const [commentMode, setCommentMode] = React.useState<boolean>(false);
   const [isPostLiked, setIsPostLiked] = React.useState<boolean>();
+  const [imageViewMode, setImageViewMode] = React.useState<boolean>(false);
   const { comments, getComments } = useComments();
 
   React.useEffect(() => {
@@ -32,6 +34,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
 
   return (
     <div className={s.post}>
+      {imageViewMode && <PhotoViewer image={image} setMode={setImageViewMode} />}
       <div className={s.author}>
         <Link to={`/users/${userData?.id}`}>
           <img src={userData?.avatar} alt="avatar" />
@@ -44,7 +47,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
         </div>
       </div>
       <div className={s.description}>{text}</div>
-      <div className={s.images}>
+      <div className={s.images} onClick={() => setImageViewMode(true)}>
         <img src={image} alt="post" />
       </div>
       <div className={s.actions}>

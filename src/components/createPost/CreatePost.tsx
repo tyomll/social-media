@@ -44,7 +44,7 @@ const CreatePost: React.FC<CreatePostType> = ({ setCreatePostMode }) => {
       <div className={s.container}>
         <div className={s.author}>
           <div className={s.avatar}>
-            <Avatar />
+            <Avatar id={auth.currentUser!.uid} />
           </div>
           <div className={s.details}>
             <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>

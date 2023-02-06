@@ -8,11 +8,11 @@ interface FriendsListType {
 }
 const FriendsList: React.FC<FriendsListType> = ({ userData }) => {
   return (
-    <div>
+    <>
       {userData?.friends.map((friendID: string) => {
         return <Friend key={friendID} friendID={friendID} />;
       })}
-    </div>
+    </>
   );
 };
 

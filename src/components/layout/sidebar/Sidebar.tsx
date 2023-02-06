@@ -51,7 +51,7 @@ const Sidebar: React.FC = () => {
       <div className={s.container}>
         <div className={s.currentUser}>
           <Link to={`/users/${auth.currentUser?.uid}`}>
-            <Avatar />
+            <Avatar id={auth.currentUser!.uid} />
           </Link>
           <div className={s.userInfo}>
             <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>

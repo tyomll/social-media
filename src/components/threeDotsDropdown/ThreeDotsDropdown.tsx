@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faUserMinus } from '@fortawesome/free-solid-svg-icons';
 import { onRemoveFriend } from '../../utils/onRemoveFriend';
 import { auth } from '../../firebase';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { setCurrentChat } from '../../redux/currentChat/slice';
+import { onSelectChat } from '../../utils/onSelectChat';
+import { useNavigate } from 'react-router-dom';
 
 interface ThreeDotsDropdownType {
   friendID: string;
@@ -12,7 +16,8 @@ interface ThreeDotsDropdownType {
 const ThreeDotsDropdown: React.FC<ThreeDotsDropdownType> = ({ friendID }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const dropdownRef = React.useRef<HTMLUListElement>(null);
-
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   function handleRemoveFriend() {
     onRemoveFriend(friendID, auth.currentUser!.uid);
   }
@@ -38,7 +43,13 @@ const ThreeDotsDropdown: React.FC<ThreeDotsDropdownType> = ({ friendID }) => {
       </div>
       {isOpen && (
         <ul ref={dropdownRef} className={`dropdown-menu ${isOpen ? 'show' : ''}`}>
-          <li className="dropdown-option-chat">
+          <li
+            className="dropdown-option-chat"
+            onClick={() => {
+              dispatch(setCurrentChat(friendID));
+              onSelectChat(friendID);
+              navigate('/messenger');
+            }}>
             <FontAwesomeIcon icon={faComments} />
             <span>Chat</span>
           </li>
