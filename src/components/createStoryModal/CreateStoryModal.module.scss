@@ -1,0 +1,83 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: rgba(255, 255, 255, 0.338);
+  z-index: 4444;
+  .container {
+    position: relative;
+    border-radius: 15px;
+    width: 500px;
+    height: 80%;
+    background-color: #313131;
+
+    .storyContent {
+      background-color: #313131;
+      height: 100%;
+
+      img {
+        border-radius: 15px;
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+      textarea {
+        appearance: none;
+        outline: none;
+        background: none;
+        position: fixed;
+        resize: none;
+        border: none;
+        color: #fff;
+        font-size: 23px;
+        z-index: 4444;
+        overflow: hidden;
+      }
+    }
+
+    .actions {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      z-index: 4444;
+      .imageUpload {
+        padding: 15px;
+        background-color: rgba(38, 38, 38, 0.187);
+        border-radius: 50%;
+        label {
+          svg {
+            width: 30px;
+            height: 30px;
+            color: #fff;
+          }
+        }
+      }
+    }
+    .publish {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      right: 20px;
+      bottom: 20px;
+      background-color: #1877f2;
+      width: 120px;
+      height: 50px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      span {
+        color: #fff;
+      }
+
+      &:hover {
+        background-color: #1876f2b5;
+      }
+    }
+  }
+}

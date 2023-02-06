@@ -1,6 +1,9 @@
 .root {
   width: 50%;
 
+  .createPost {
+    margin-top: 30px;
+  }
   .container {
     display: flex;
     flex-direction: column;
@@ -14,6 +17,8 @@
       gap: 20px;
       cursor: pointer;
       transition: 0.5s;
+      box-shadow: 5px 5px 9px -9px rgba(0, 0, 0, 0.19);
+
       &:hover {
         background-color: rgba(255, 255, 255, 0.83);
         opacity: 0.8;

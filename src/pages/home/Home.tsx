@@ -2,6 +2,7 @@ import React from 'react';
 import Avatar from '../../components/avatar/Avatar';
 import CreatePost from '../../components/createPost/CreatePost';
 import PostList from '../../components/postList/PostList';
+import Stories from '../../components/stories/Stories';
 import { auth } from '../../firebase';
 import { useUserData } from '../../hooks/useUsers';
 import s from './Home.module.scss';
@@ -15,7 +16,13 @@ const Home: React.FC = () => {
 
   return (
     <div className={s.root}>
-      {createPostMode && <CreatePost setCreatePostMode={setCreatePostMode} />}
+      <Stories />
+
+      {createPostMode && (
+        <div className={s.createPost}>
+          <CreatePost setCreatePostMode={setCreatePostMode} />
+        </div>
+      )}
       <div className={s.container}>
         <div className={s.createPost} onClick={() => setCreatePostMode(true)}>
           <div className={s.avatar}>
