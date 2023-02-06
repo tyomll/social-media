@@ -1,3 +1,6 @@
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { format } from 'date-fns';
 import React from 'react';
 import Avatar from '../../../../components/avatar/Avatar';
 import { auth } from '../../../../firebase';
@@ -15,6 +18,7 @@ const Message: React.FC<MessageType> = ({ message }) => {
       ref.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [message]);
+
   return (
     <div
       ref={ref}
@@ -26,8 +30,11 @@ const Message: React.FC<MessageType> = ({ message }) => {
         <Avatar id={message.senderID} />
       </div>
       <div className={s.content}>
-        <span>{message.text}</span>
         {message.image && <img src={message.image} />}
+        <div className={s.details}>
+          <span className={s.text}>{message.text}</span>
+          <span className={s.date}>{format(message.date, 'HH:mm')}</span>
+        </div>
       </div>
     </div>
   );

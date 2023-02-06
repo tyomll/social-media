@@ -1,5 +1,5 @@
 import React from 'react';
-import { faImage, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faImage, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from '../../Messenger.module.scss';
 import { MessageDataType } from '../../../../types/messageData.type';
@@ -23,16 +23,20 @@ const Input: React.FC = () => {
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
-            onMessageSend(message, currentChat.userID, currentChat.chatID);
-            setMessage({
-              text: '',
-              image: '',
-            });
+            if (message.image !== '' || message.text !== '') {
+              onMessageSend(message, currentChat.userID, currentChat.chatID);
+              setMessage({
+                text: '',
+                image: '',
+              });
+            } else {
+              alert('You must fill all fields.');
+            }
           }
         }}
       />
-      <label htmlFor="file">
-        <FontAwesomeIcon icon={faImage} />
+      <label htmlFor="file" style={{ backgroundColor: message.image ? '#0954b6' : '' }}>
+        <FontAwesomeIcon icon={message.image ? faCheck : faImage} />
         <input
           id="file"
           type="file"
@@ -42,11 +46,15 @@ const Input: React.FC = () => {
       </label>
       <span
         onClick={() => {
-          onMessageSend(message, currentChat.userID, currentChat.chatID);
-          setMessage({
-            text: '',
-            image: '',
-          });
+          if (message.image !== '' || message.text !== '') {
+            onMessageSend(message, currentChat.userID, currentChat.chatID);
+            setMessage({
+              text: '',
+              image: '',
+            });
+          } else {
+            alert('You must fill all fields.');
+          }
         }}>
         <FontAwesomeIcon icon={faPaperPlane} />
       </span>
