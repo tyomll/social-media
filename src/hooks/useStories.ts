@@ -1,11 +1,11 @@
 import React from 'react'
-import { collection, addDoc } from "firebase/firestore";
-import { getDownloadURL, ref, uploadBytes, uploadString } from "firebase/storage";
+import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
+import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { uuidv4 } from '@firebase/util';
 import { auth, db, storage } from "../firebase";
 
 export const useStories = () => {
-  const [stories, setStoires] = React.useState<any>()
+  const [stories, setStories] = React.useState<any>()
 
   async function uploadStory(story: any) {
     const fileRef = ref(storage, 'storyImages/' + uuidv4() + '.png')
@@ -34,6 +34,13 @@ export const useStories = () => {
       console.log('fill all fields')
     }
   }
+  const getStories = async () => {
+    const q = query(collection(db, "stories"), orderBy('date', 'desc'));
+    onSnapshot(q, (data) => {
+      const dataa = data.docs.map((doc) => ({ ...doc.data() as Record<string, unknown>, id: doc.id })) as any
+      setStories(dataa)
+    })
+  }
 
-  return { stories, uploadStory }
+  return { stories, getStories, uploadStory }
 }

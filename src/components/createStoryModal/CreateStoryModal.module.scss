@@ -31,9 +31,8 @@
     .storyContent {
       position: relative;
       background-color: #313131;
-      height: 100%;
       border-radius: 15px;
-
+      height: 100%;
       span {
         position: fixed;
         color: white;
@@ -48,15 +47,34 @@
     }
 
     .actions {
+      display: flex;
+      justify-content: space-between;
       position: absolute;
-      top: 30px;
-      right: 30px;
+      width: 100%;
+      height: 100px;
       z-index: 4444;
+      padding: 20px 20px;
+      .close {
+        padding: 15px;
+        background-color: rgba(38, 38, 38, 0.187);
+        border-radius: 50%;
+        cursor: pointer;
+
+        svg {
+          width: 30px;
+          height: 30px;
+          color: #fff;
+        }
+      }
       .imageUpload {
         padding: 15px;
         background-color: rgba(38, 38, 38, 0.187);
         border-radius: 50%;
+        cursor: pointer;
+
         label {
+          cursor: pointer;
+
           svg {
             width: 30px;
             height: 30px;

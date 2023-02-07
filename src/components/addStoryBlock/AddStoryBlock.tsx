@@ -12,7 +12,7 @@ const AddStoryBlock = () => {
 
   return (
     <div className={s.root}>
-      {createStoryMode && <CreateStoryModal />}
+      {createStoryMode && <CreateStoryModal setMode={setCreateStoryMode} />}
       <div className={s.container} onClick={() => setCreateStoryMode(true)}>
         <img src={userData?.coverImage} alt="story" />
         <div className={s.buttons}>
