@@ -16,27 +16,34 @@
     height: 80%;
     background-color: #313131;
 
+    textarea {
+      outline: none;
+      background: none;
+      position: fixed;
+      resize: none;
+      border: none;
+      color: #fff;
+      font-size: 23px;
+      z-index: 4444;
+      overflow: hidden;
+    }
+
     .storyContent {
+      position: relative;
       background-color: #313131;
       height: 100%;
+      border-radius: 15px;
 
+      span {
+        position: fixed;
+        color: white;
+        font-size: 23px;
+      }
       img {
         border-radius: 15px;
         object-fit: cover;
         height: 100%;
         width: 100%;
-      }
-      textarea {
-        appearance: none;
-        outline: none;
-        background: none;
-        position: fixed;
-        resize: none;
-        border: none;
-        color: #fff;
-        font-size: 23px;
-        z-index: 4444;
-        overflow: hidden;
       }
     }
 
@@ -63,8 +70,8 @@
       align-items: center;
       justify-content: center;
       position: absolute;
-      right: 20px;
-      bottom: 20px;
+      right: 30px;
+      bottom: 30px;
       background-color: #1877f2;
       width: 120px;
       height: 50px;
