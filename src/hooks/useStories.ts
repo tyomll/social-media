@@ -6,7 +6,7 @@ import { auth, db, storage } from "../firebase";
 
 export const useStories = () => {
   const [stories, setStories] = React.useState<any>()
-
+  const [storyImages, setStoryImages] = React.useState<string[]>()
   async function uploadStory(story: any) {
     const fileRef = ref(storage, 'storyImages/' + uuidv4() + '.png')
 
@@ -41,6 +41,14 @@ export const useStories = () => {
       setStories(dataa)
     })
   }
+  const getStoryImages = async () => {
+    const q = query(collection(db, "stories"), orderBy('date', 'desc'));
+    onSnapshot(q, (data) => {
+      const dataa = data.docs.map((doc) => (doc.data().image)) as any
 
-  return { stories, getStories, uploadStory }
+      setStoryImages(dataa)
+    })
+  }
+
+  return { stories, storyImages, getStories, uploadStory, getStoryImages }
 }

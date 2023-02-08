@@ -33,16 +33,35 @@
       background-color: #313131;
       border-radius: 15px;
       height: 100%;
-      span {
+      textarea {
+        z-index: 4444;
         position: fixed;
         color: white;
         font-size: 23px;
       }
       img {
-        border-radius: 15px;
         object-fit: cover;
         height: 100%;
         width: 100%;
+      }
+    }
+    .storyResultWrapper {
+      position: absolute;
+      left: -5000px;
+      .storyResult {
+        position: relative;
+        background-color: #313131;
+        border-radius: 15px;
+        height: 100%;
+        textarea {
+          position: absolute;
+          color: white;
+          font-size: 23px;
+        }
+        img {
+          height: 100%;
+          width: 100%;
+        }
       }
     }
 

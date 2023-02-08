@@ -39,6 +39,7 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
       html2canvas(storyElementRef.current!)
         .then((canvas) => {
           const dataURL = canvas.toDataURL();
+          console.log(dataURL);
           uploadStory(dataURL);
         })
         .catch((err) => {
@@ -48,7 +49,7 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
       alert('You must write text or upload image.');
     }
   };
-
+  console.log(storyElementRef.current);
   return (
     <div className={s.root}>
       <div className={s.container} onClick={handleClick}>
@@ -63,7 +64,7 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
             </label>
           </div>
         </div>
-        <div ref={storyElementRef} className={s.storyContent}>
+        <div className={s.storyContent}>
           <textarea
             value={text}
             onChange={(event) => setText(event.target.value)}
@@ -81,6 +82,20 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
               }}
             />
           )}
+        </div>
+        <div className={s.storyResultWrapper}>
+          <div ref={storyElementRef} className={s.storyResult}>
+            <textarea
+              value={text}
+              onChange={(event) => setText(event.target.value)}
+              style={{
+                top: y,
+                left: x,
+                zIndex: 4444,
+              }}
+            />
+            {image && <img src={image} alt="story" />}
+          </div>
         </div>
         <div className={s.publish} onClick={onSubmitStory} ref={submitElementRef}>
           <span>Publish</span>
