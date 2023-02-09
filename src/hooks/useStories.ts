@@ -3,11 +3,13 @@ import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firesto
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { uuidv4 } from '@firebase/util';
 import { auth, db, storage } from "../firebase";
+import { StoryDataType } from '../types/storyData.type';
 
 export const useStories = () => {
-  const [stories, setStories] = React.useState<any>()
+  const [stories, setStories] = React.useState<StoryDataType[]>()
   const [storyImages, setStoryImages] = React.useState<string[]>()
-  async function uploadStory(story: any) {
+
+  async function uploadStory(story: string) {
     const fileRef = ref(storage, 'storyImages/' + uuidv4() + '.png')
 
     if (story) {

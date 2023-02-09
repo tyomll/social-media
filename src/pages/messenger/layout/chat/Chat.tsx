@@ -3,6 +3,7 @@ import Avatar from '../../../../components/avatar/Avatar';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
 import { useMessages } from '../../../../hooks/useMessages';
 import { useUserData } from '../../../../hooks/useUsers';
+import { MessageDataType } from '../../../../types/messageData.type';
 import s from '../../Messenger.module.scss';
 import Input from './Input';
 import Message from './Message';
@@ -26,7 +27,7 @@ const Chat: React.FC = () => {
         </div>
       )}
       <div className={s.chat}>
-        {messages?.map((m: any) => {
+        {messages?.map((m: MessageDataType) => {
           return <Message key={m.id} message={m} />;
         })}
       </div>

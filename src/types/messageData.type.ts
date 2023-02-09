@@ -1,4 +1,11 @@
 export interface MessageDataType {
-  text: string;
-  image: any;
+  id: string
+  date: number
+  senderID: string
+  image: string
+  text: string
+  messages: {
+    text: string;
+    image: any;
+  }
 }

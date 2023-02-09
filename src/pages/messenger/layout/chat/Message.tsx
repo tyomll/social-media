@@ -1,17 +1,17 @@
-import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { format } from 'date-fns';
 import React from 'react';
+import { format } from 'date-fns';
+
 import Avatar from '../../../../components/avatar/Avatar';
 import { auth } from '../../../../firebase';
 import s from '../../Messenger.module.scss';
+import { MessageDataType } from '../../../../types/messageData.type';
 
 interface MessageType {
-  message: any;
+  message: MessageDataType;
 }
 
 const Message: React.FC<MessageType> = ({ message }) => {
-  const ref = React.useRef<any>(null);
+  const ref = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     if (ref) {

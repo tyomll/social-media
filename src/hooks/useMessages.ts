@@ -1,10 +1,12 @@
+import { DocumentData } from 'firebase/firestore';
 import React from "react"
 import { doc, onSnapshot } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useAppSelector } from "./redux-hooks";
+import { MessageDataType } from "../types/messageData.type";
 
 export const useMessages = () => {
-  const [messages, setMessages] = React.useState<any>([])
+  const [messages, setMessages] = React.useState<DocumentData | MessageDataType>([])
   const chatID = useAppSelector(state => state.currentChat.chatID)
 
   async function getMessages() {

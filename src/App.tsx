@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import CreatePost from './components/createPost/CreatePost';
 import MainLayout from './components/layout/MainLayout';
 import { useAuth } from './hooks/use-auth';
 import Home from './pages/home/Home';
