@@ -1,3 +1,4 @@
+import swal from 'sweetalert';
 import { getDoc, doc, setDoc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
@@ -24,6 +25,10 @@ export async function onSelectChat(id: string) {
       });
     }
   } catch (e: any) {
-    console.log(e.message)
+    swal({
+      title: "Oops ErRoR...",
+      text: e.message,
+      icon: "error",
+    });
   }
 }

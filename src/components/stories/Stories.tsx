@@ -16,7 +16,7 @@ const Stories = () => {
     <div className={s.root}>
       <AddStoryBlock />
       {stories &&
-        stories.map((story: StoryDataType) => {
+        stories.slice(0, 4).map((story: StoryDataType) => {
           return <StoriesBlock key={story.id} {...story} />;
         })}
     </div>

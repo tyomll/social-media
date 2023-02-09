@@ -1,4 +1,5 @@
 import React from 'react'
+import swal from 'sweetalert';
 import { collection, addDoc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { uuidv4 } from '@firebase/util';
@@ -26,14 +27,25 @@ export const useStories = () => {
           });
 
         }).catch((e) => {
-          console.log(e.message)
+          swal({
+            title: "Oops ErRoR...",
+            text: e.message,
+            icon: "error",
+          });
         })
       }).catch((e) => {
-        console.log(e.message)
+        swal({
+          title: "Oops ErRoR...",
+          text: e.message,
+          icon: "error",
+        });
       })
     }
     else {
-      console.log('fill all fields')
+      swal({
+        title: "You must fill all fields.",
+        icon: "warning",
+      });
     }
   }
   const getStories = async () => {
@@ -51,6 +63,5 @@ export const useStories = () => {
       setStoryImages(dataa)
     })
   }
-
   return { stories, storyImages, getStories, uploadStory, getStoryImages }
 }

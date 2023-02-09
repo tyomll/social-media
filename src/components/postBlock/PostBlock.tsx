@@ -46,10 +46,12 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
           <span>{formatDistanceToNow(date)} ago</span>
         </div>
       </div>
-      <div className={s.description}>{text}</div>
-      <div className={s.images} onClick={() => setImageViewMode(true)}>
-        <img src={image} alt="post" />
-      </div>
+      {text && <div className={s.description}>{text}</div>}
+      {image && (
+        <div className={s.images} onClick={() => setImageViewMode(true)}>
+          <img src={image} alt="post" />
+        </div>
+      )}
       <div className={s.actions}>
         <div className={s.like}>
           <FontAwesomeIcon

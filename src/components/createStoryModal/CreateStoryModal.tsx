@@ -5,6 +5,7 @@ import s from './CreateStoryModal.module.scss';
 import { convertFileToBase64 } from '../../utils/convertFileToBase64';
 import html2canvas from 'html2canvas';
 import { useStories } from '../../hooks/useStories';
+import swal from 'sweetalert';
 
 interface CreateStoryModalType {
   setMode: (arg: boolean) => void;
@@ -13,7 +14,7 @@ interface CreateStoryModalType {
 const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
   const { uploadStory } = useStories();
   const [text, setText] = React.useState<string>('');
-  const [image, setImage] = React.useState<string>();
+  const [image, setImage] = React.useState<string>('');
   const [x, setX] = React.useState(0);
   const [y, setY] = React.useState(0);
   const storyElementRef = React.useRef<HTMLDivElement>(null);
@@ -35,21 +36,26 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
   };
 
   const onSubmitStory = async () => {
-    if (text || image) {
+    if (text && image) {
       html2canvas(storyElementRef.current!)
         .then((canvas) => {
           const dataURL = canvas.toDataURL();
-          console.log(dataURL);
           uploadStory(dataURL);
         })
         .catch((err) => {
-          console.log(err.message);
+          swal({
+            title: 'Oops... ErRoR.',
+            text: err.message,
+            icon: 'error',
+          });
         });
     } else {
-      alert('You must write text or upload image.');
+      swal({
+        title: 'Your story must have text or image!',
+        icon: 'warning',
+      });
     }
   };
-  console.log(storyElementRef.current);
   return (
     <div className={s.root}>
       <div className={s.container} onClick={handleClick}>

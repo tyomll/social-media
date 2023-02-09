@@ -1,4 +1,5 @@
 import React from 'react'
+import swal from 'sweetalert';
 
 import { PostDataType } from './../types/postData.type';
 import { collection, addDoc, onSnapshot, query, orderBy, where, } from "firebase/firestore";
@@ -15,7 +16,55 @@ export const usePost = () => {
 
   async function uploadPost(post: IncomingPostType) {
     const fileRef = ref(storage, 'postImages/' + uuidv4() + '.png')
-    if (post.text !== '' && post.image) {
+    if (post.text !== '') {
+      const postCollectionRef = collection(db, 'posts');
+      await addDoc(postCollectionRef, {
+        id: uuidv4(),
+        author: {
+          id: auth.currentUser?.uid,
+        },
+        text: post.text,
+        likes: [],
+        date: Date.now()
+      });
+      swal({
+        title: "Your post has been added!",
+        icon: "success",
+      });
+    }
+    else if (post.image) {
+      await uploadBytes(fileRef, post.image, { contentType: 'image/png' }).then(async () => {
+        await getDownloadURL(fileRef).then(async (imageURL: string) => {
+          const postCollectionRef = collection(db, 'posts');
+          await addDoc(postCollectionRef, {
+            id: uuidv4(),
+            author: {
+              id: auth.currentUser?.uid,
+            },
+            image: imageURL,
+            likes: [],
+            date: Date.now()
+          });
+          swal({
+            title: "Your post has been added!",
+            icon: "success",
+          });
+        }).catch((e) => {
+          swal({
+            title: "Oops ErRoR!",
+            text: e.message,
+            icon: "error",
+          });
+        })
+      }).catch((e) => {
+        swal({
+          title: "Oops ErRoR!",
+          text: e.message,
+          icon: "error",
+        });
+      })
+    }
+    else if (post.text !== '' && post.image) {
       await uploadBytes(fileRef, post.image, { contentType: 'image/png' }).then(async () => {
         await getDownloadURL(fileRef).then(async (imageURL: string) => {
           const postCollectionRef = collection(db, 'posts');
@@ -29,19 +78,34 @@ export const usePost = () => {
             likes: [],
             date: Date.now()
           });
-
+          swal({
+            title: "Your post has been added!",
+            icon: "success",
+          });
         }).catch((e) => {
-          console.log(e.message)
+          swal({
+            title: "Oops ErRoR!",
+            text: e.message,
+            icon: "error",
+          });
         })
-        console.log('Posted')
       }).catch((e) => {
-        console.log(e.message)
+        swal({
+          title: "Oops ErRoR!",
+          text: e.message,
+          icon: "error",
+        });
       })
     }
     else {
-      console.log('fill all fields')
+      swal({
+        title: "You must fill at least one field!",
+        icon: "warning",
+      });
     }
   }
+
+
 
   const getPosts = async () => {
     const q = query(collection(db, "posts"), orderBy('date', 'desc'));
