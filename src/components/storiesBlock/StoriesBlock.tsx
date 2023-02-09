@@ -14,7 +14,7 @@ const StoriesBlock: React.FC<StoriesBlockType> = ({ author, image }) => {
   const [storyViewMode, setStoryViewMode] = React.useState(false);
   return (
     <>
-      {storyViewMode && <StoryModal />}
+      {storyViewMode && <StoryModal setStoryViewMode={setStoryViewMode} />}
 
       <div className={s.root} onClick={() => setStoryViewMode(true)}>
         <div className={s.container}>

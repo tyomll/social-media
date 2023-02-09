@@ -1,9 +1,11 @@
 import React from 'react';
 import Stories from 'react-insta-stories';
 import { useStories } from '../../hooks/useStories';
-import { useUserData } from '../../hooks/useUsers';
-import Avatar from '../avatar/Avatar';
 import s from './StoryModal.module.scss';
+
+interface StoryModalType {
+  setStoryViewMode: (arg: boolean) => void;
+}
 
 const storyStyles = {
   objectFit: 'cover',
@@ -11,15 +13,23 @@ const storyStyles = {
   height: ' 100%',
 };
 
-const StoryModal: React.FC = () => {
+const StoryModal: React.FC<StoryModalType> = ({ setStoryViewMode }) => {
   const { storyImages, getStoryImages } = useStories();
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     getStoryImages();
-  });
+  }, []);
+
   return (
-    <div className={s.root}>
-      <div className={s.container}>
+    <div
+      className={s.root}
+      onClick={(e) => {
+        if (!containerRef || !containerRef.current!.contains(e.target as Node)) {
+          setStoryViewMode(false);
+        }
+      }}>
+      <div ref={containerRef} className={s.container}>
         {storyImages && (
           <Stories
             stories={storyImages}
