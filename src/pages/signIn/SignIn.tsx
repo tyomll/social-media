@@ -37,7 +37,7 @@ const SignIn: React.FC = () => {
           token: user.refreshToken,
         }),
       );
-      navigate('/profile');
+      navigate(`/users/${user.uid}`);
     });
   }
 
