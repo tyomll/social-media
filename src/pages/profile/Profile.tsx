@@ -7,7 +7,12 @@ import s from './Profile.module.scss';
 import ProfileCover from '../../components/profileCover/ProfileCover';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglass, faUserCheck, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import {
+  faDoorOpen,
+  faHourglass,
+  faUserCheck,
+  faUserPlus,
+} from '@fortawesome/free-solid-svg-icons';
 import { auth } from '../../firebase';
 import { onAddFriend } from '../../utils/onAddFriend';
 import { onRemoveFriend } from '../../utils/onRemoveFriend';
@@ -136,6 +141,7 @@ const Profile: React.FC = () => {
                 dispatch(removeAuthUser());
                 navigate('/login');
               }}>
+              <FontAwesomeIcon icon={faDoorOpen} />
               Log out
             </span>
           )}

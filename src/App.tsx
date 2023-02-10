@@ -8,6 +8,7 @@ import Profile from './pages/profile/Profile';
 import SignIn from './pages/signIn/SignIn';
 import SignUp from './pages/signUp/SignUp';
 import { checkAuthUser } from './utils/checkAuthUser';
+import PrivateRoutes from './utils/PrivateRoutes';
 
 const App: React.FC = () => {
   const { isAuth } = useAuth();
@@ -21,7 +22,9 @@ const App: React.FC = () => {
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/users/:id" element={<Profile />} />
-        <Route path="/messenger" element={<Messenger />} />
+        <Route path="/" element={<PrivateRoutes />}>
+          <Route path="/messenger" element={<Messenger />} />
+        </Route>
         <Route path="/login" element={<SignIn />} />
         <Route path="/register" element={<SignUp />} />
       </Route>

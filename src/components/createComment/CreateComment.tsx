@@ -14,19 +14,23 @@ const CreateComment: React.FC<CreateCommentType> = ({ postID }) => {
   const { onAddComment } = useComments(postID, comment, setComment);
 
   async function handleCommentAdd() {
-    await onAddComment();
+    if (auth.currentUser) {
+      await onAddComment();
+    }
   }
 
   return (
     <div className={s.writeComment}>
-      <div className={s.avatar}>
-        <Avatar id={auth.currentUser!.uid} />
-      </div>
+      {auth.currentUser && (
+        <div className={s.avatar}>
+          <Avatar id={auth.currentUser!.uid} />
+        </div>
+      )}
       <div className={s.input}>
         <input
           type="text"
           value={comment}
-          placeholder="Add a comment..."
+          placeholder={auth.currentUser ? 'Add a comment...' : 'Log in to comment this post...'}
           onChange={(e) => setComment(e.target.value)}
         />
         <FontAwesomeIcon icon={faShare} onClick={handleCommentAdd} />

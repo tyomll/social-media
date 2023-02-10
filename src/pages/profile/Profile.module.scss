@@ -111,11 +111,13 @@
         }
       }
       .logout {
+        display: flex;
         border-radius: 5px;
         padding: 10px;
         background-color: #1877f2;
         color: white;
         white-space: nowrap;
+        gap: 10px;
         cursor: pointer;
         transition: 0.3s ease-in-out;
         &:hover {

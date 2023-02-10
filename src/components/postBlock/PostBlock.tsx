@@ -83,7 +83,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
           <span>{comments?.length}</span>
         </div>
       </div>
-      {auth.currentUser && commentMode && (
+      {commentMode && (
         <div className={s.commentsSection}>
           <CreateComment postID={id} />
           <div className={s.comments}>

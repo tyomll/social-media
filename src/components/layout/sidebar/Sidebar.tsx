@@ -1,12 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faHome,
-  faContactBook,
-  faImage,
-  faUser,
-  faComment,
-} from '@fortawesome/free-solid-svg-icons';
+import { faHome, faUser, faComment } from '@fortawesome/free-solid-svg-icons';
 import s from './Sidebar.module.scss';
 import { auth } from '../../../firebase';
 import { useUserData } from '../../../hooks/useUsers';
@@ -21,24 +15,14 @@ const pages = [
     title: 'Home',
   },
   {
-    link: '/messenger',
-    icon: faComment,
-    title: 'Messenger',
-  },
-  {
-    link: '/friends',
-    icon: faContactBook,
-    title: 'Friends',
-  },
-  {
-    link: '/photos',
-    icon: faImage,
-    title: 'Photos',
-  },
-  {
     link: '/profile',
     icon: faUser,
     title: 'Profile',
+  },
+  {
+    link: '/messenger',
+    icon: faComment,
+    title: 'Messenger',
   },
 ];
 const Sidebar: React.FC = () => {
@@ -75,18 +59,25 @@ const Sidebar: React.FC = () => {
         )}
 
         <div className={s.pages}>
-          {pages.map((page, i) => {
-            return (
-              <Link
-                key={page.title + i}
-                to={page.link}
-                className={s.page}
-                style={{ borderBottom: i === pages.length - 1 ? 'none' : '' }}>
-                <FontAwesomeIcon icon={page.icon} />
-                <span>{page.title}</span>
-              </Link>
-            );
-          })}
+          {auth.currentUser ? (
+            pages.map((page, i) => {
+              return (
+                <Link
+                  key={page.title + i}
+                  to={page.link}
+                  className={s.page}
+                  style={{ borderBottom: i === pages.length - 1 ? 'none' : '' }}>
+                  <FontAwesomeIcon icon={page.icon} />
+                  <span>{page.title}</span>
+                </Link>
+              );
+            })
+          ) : (
+            <Link key="home" to="/" className={s.page}>
+              <FontAwesomeIcon icon={faHome} />
+              <span>Home</span>
+            </Link>
+          )}
         </div>
       </div>
     </div>
