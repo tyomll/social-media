@@ -1,4 +1,5 @@
 import React from 'react';
+import ContentLoader from 'react-content-loader';
 import Avatar from '../../components/avatar/Avatar';
 import CreatePost from '../../components/createPost/CreatePost';
 import PostList from '../../components/postList/PostList';
@@ -8,10 +9,22 @@ import { useUserData } from '../../hooks/useUsers';
 import s from './Home.module.scss';
 
 const Home: React.FC = () => {
-  const { userData } = useUserData(auth.currentUser?.uid);
+  const { loading, userData } = useUserData(auth.currentUser?.uid);
   const [createPostMode, setCreatePostMode] = React.useState<boolean>(false);
-  if (!userData) {
-    return <>loading</>;
+
+  if (loading) {
+    return (
+      <ContentLoader
+        speed={2}
+        width={530}
+        height={540}
+        viewBox="0 0 550 550"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb">
+        <rect x="188" y="338" rx="0" ry="0" width="1" height="0" />
+        <rect x="7" y="10" rx="32" ry="32" width="531" height="485" />
+      </ContentLoader>
+    );
   }
 
   return (
@@ -28,7 +41,7 @@ const Home: React.FC = () => {
           <div className={s.avatar}>
             <Avatar id={auth.currentUser!.uid} />
           </div>
-          <span>What's new {userData.firstName}?</span>
+          <span>What's new {userData?.firstName}?</span>
         </div>
         <div className={s.posts}>
           <PostList />

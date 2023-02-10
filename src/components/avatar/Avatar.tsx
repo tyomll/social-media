@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from './Avatar.module.scss';
 import { auth } from '../../firebase';
 import { useUserData } from '../../hooks/useUsers';
+import ContentLoader from 'react-content-loader';
 
 interface AvatarType {
   id?: string;
@@ -11,11 +12,7 @@ interface AvatarType {
 }
 
 const Avatar: React.FC<AvatarType> = ({ id, setAvatarUploadMode }) => {
-  const { loading, userData } = useUserData(id);
-
-  if (loading) {
-    return <>loading...</>;
-  }
+  const { userData } = useUserData(id);
 
   return (
     <div className={s.avatar}>

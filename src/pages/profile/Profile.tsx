@@ -12,6 +12,7 @@ import { auth } from '../../firebase';
 import { onAddFriend } from '../../utils/onAddFriend';
 import { onRemoveFriend } from '../../utils/onRemoveFriend';
 import FriendsList from '../../components/layout/friendsBar/friendsList/FriendsList';
+import ContentLoader from 'react-content-loader';
 
 const sections = ['Posts', 'Friends'];
 
@@ -46,7 +47,18 @@ const Profile: React.FC = () => {
   }, [userData]);
 
   if (loading) {
-    return <>loading...</>;
+    return (
+      <ContentLoader
+        speed={2}
+        width={530}
+        height={540}
+        viewBox="0 0 550 550"
+        backgroundColor="#f3f3f3"
+        foregroundColor="#ecebeb">
+        <rect x="188" y="338" rx="0" ry="0" width="1" height="0" />
+        <rect x="7" y="10" rx="32" ry="32" width="531" height="485" />
+      </ContentLoader>
+    );
   }
 
   return (
@@ -99,6 +111,7 @@ const Profile: React.FC = () => {
           {sections.map((section, i) => {
             return (
               <span
+                key={i}
                 style={{ color: sectionIndex === i ? '#1877f2' : '' }}
                 onClick={() => setSectionIndex(i)}>
                 {section}
