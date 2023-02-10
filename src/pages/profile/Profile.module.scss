@@ -90,20 +90,36 @@
     .sections {
       display: flex;
       align-items: center;
-      padding: 30px 50px;
+      justify-content: space-between;
       background-color: #fff;
-      height: 50px;
+      padding: 30px 50px;
       width: 100%;
-      gap: 40px;
 
-      span {
-        color: #b0b3b8;
-        font-weight: 500;
-        font-size: 18px;
+      .links {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        span {
+          color: #b0b3b8;
+          font-weight: 500;
+          font-size: 18px;
+          cursor: pointer;
+          transition: 0.2s ease-in-out;
+          &:hover {
+            color: #1877f2;
+          }
+        }
+      }
+      .logout {
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #1877f2;
+        color: white;
+        white-space: nowrap;
         cursor: pointer;
-        transition: 0.2s ease-in-out;
+        transition: 0.3s ease-in-out;
         &:hover {
-          color: #1877f2;
+          background-color: #1876f2d2;
         }
       }
     }

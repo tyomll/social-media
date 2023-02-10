@@ -9,10 +9,10 @@ import { useUserData } from '../../hooks/useUsers';
 import s from './Home.module.scss';
 
 const Home: React.FC = () => {
-  const { loading, userData } = useUserData(auth.currentUser?.uid);
+  const { userData } = useUserData(auth.currentUser?.uid);
   const [createPostMode, setCreatePostMode] = React.useState<boolean>(false);
 
-  if (loading) {
+  if (auth.currentUser && !userData) {
     return (
       <ContentLoader
         speed={2}
@@ -28,8 +28,8 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className={s.root}>
-      <Stories />
+    <div className={s.root} style={{ width: !auth.currentUser ? '75%' : '' }}>
+      {auth.currentUser && <Stories />}
 
       {createPostMode && (
         <div className={s.createPost}>
@@ -37,12 +37,14 @@ const Home: React.FC = () => {
         </div>
       )}
       <div className={s.container}>
-        <div className={s.createPost} onClick={() => setCreatePostMode(true)}>
-          <div className={s.avatar}>
-            <Avatar id={auth.currentUser!.uid} />
+        {auth.currentUser && (
+          <div className={s.createPost} onClick={() => setCreatePostMode(true)}>
+            <div className={s.avatar}>
+              <Avatar id={auth.currentUser!.uid} />
+            </div>
+            <span>What's new {userData?.firstName}?</span>
           </div>
-          <span>What's new {userData?.firstName}?</span>
-        </div>
+        )}
         <div className={s.posts}>
           <PostList />
         </div>

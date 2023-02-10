@@ -9,7 +9,7 @@ import FriendsList from './friendsList/FriendsList';
 const FriendsBar: React.FC = () => {
   const { loading, userData } = useUserData(auth.currentUser?.uid);
 
-  if (loading) {
+  if (auth.currentUser && loading) {
     return (
       <ContentLoader
         speed={2}
@@ -25,7 +25,7 @@ const FriendsBar: React.FC = () => {
   }
 
   return (
-    <div className={s.root}>
+    <div className={s.root} style={{ display: !auth.currentUser ? 'none' : '' }}>
       <div className={s.container}>
         {userData?.friendRequests ? (
           <>

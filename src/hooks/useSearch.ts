@@ -7,7 +7,7 @@ export const useSearch = (input: string) => {
   const [users, setUsers] = React.useState<UserDataType[]>()
 
   const getSearchUser = async () => {
-    const q = query(collection(db, "users"), where('username', '!=', auth.currentUser?.displayName), where("username", ">=", input), where("username", "<=", input + "\uf8ff"));
+    const q = auth.currentUser ? query(collection(db, "users"), where('username', '!=', auth.currentUser?.displayName), where("username", ">=", input), where("username", "<=", input + "\uf8ff")) : query(collection(db, "users"), where("username", ">=", input), where("username", "<=", input + "\uf8ff"));
     if (input.length > 0) {
       onSnapshot(q, (data) => {
         const dataa = data.docs.map((doc) => ({ ...doc.data() as Record<string, unknown> })) as any

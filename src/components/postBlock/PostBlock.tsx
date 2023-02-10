@@ -9,7 +9,7 @@ import { auth } from '../../firebase';
 import { onLike } from '../../utils/onLike';
 import CommentsList from '../commentsList/CommentsList';
 import CreateComment from '../createComment/CreateComment';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useComments } from '../../hooks/useComments';
 import PhotoViewer from '../photoViewer/PhotoViewer';
 
@@ -19,6 +19,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
   const [isPostLiked, setIsPostLiked] = React.useState<boolean>();
   const [imageViewMode, setImageViewMode] = React.useState<boolean>(false);
   const { comments, getComments } = useComments();
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     (async () => {
@@ -55,7 +56,13 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
       <div className={s.actions}>
         <div className={s.like}>
           <FontAwesomeIcon
-            onClick={() => onLike(id, auth.currentUser!.uid, isPostLiked!)}
+            onClick={() => {
+              if (auth.currentUser) {
+                onLike(id, auth.currentUser.uid, isPostLiked!);
+              } else {
+                navigate('/login');
+              }
+            }}
             icon={faHeart}
             style={{ color: isPostLiked ? 'rgba(189, 9, 9, 0.979)' : '' }}
           />
@@ -76,7 +83,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
           <span>{comments?.length}</span>
         </div>
       </div>
-      {commentMode && (
+      {auth.currentUser && commentMode && (
         <div className={s.commentsSection}>
           <CreateComment postID={id} />
           <div className={s.comments}>

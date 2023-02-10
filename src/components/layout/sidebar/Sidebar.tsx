@@ -42,9 +42,9 @@ const pages = [
   },
 ];
 const Sidebar: React.FC = () => {
-  const { loading, userData } = useUserData(auth.currentUser?.uid);
+  const { userData } = useUserData(auth.currentUser?.uid);
 
-  if (loading) {
+  if (auth.currentUser && !userData) {
     return (
       <ContentLoader
         speed={2}
@@ -62,15 +62,18 @@ const Sidebar: React.FC = () => {
   return (
     <div className={s.root}>
       <div className={s.container}>
-        <div className={s.currentUser}>
-          <Link to={`/users/${auth.currentUser?.uid}`}>
-            <Avatar id={auth.currentUser!.uid} />
-          </Link>
-          <div className={s.userInfo}>
-            <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
-            <span>{'@' + userData?.username}</span>
+        {auth.currentUser && (
+          <div className={s.currentUser}>
+            <Link to={`/users/${auth.currentUser?.uid}`}>
+              <Avatar id={auth.currentUser!.uid} />
+            </Link>
+            <div className={s.userInfo}>
+              <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>
+              <span>{'@' + userData?.username}</span>
+            </div>
           </div>
-        </div>
+        )}
+
         <div className={s.pages}>
           {pages.map((page, i) => {
             return (

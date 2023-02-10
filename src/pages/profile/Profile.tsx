@@ -5,7 +5,7 @@ import UploadAvatarModal from '../../components/uploadAvatarModal/UploadAvatarMo
 import Avatar from '../../components/avatar/Avatar';
 import s from './Profile.module.scss';
 import ProfileCover from '../../components/profileCover/ProfileCover';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglass, faUserCheck, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { auth } from '../../firebase';
@@ -13,21 +13,24 @@ import { onAddFriend } from '../../utils/onAddFriend';
 import { onRemoveFriend } from '../../utils/onRemoveFriend';
 import FriendsList from '../../components/layout/friendsBar/friendsList/FriendsList';
 import ContentLoader from 'react-content-loader';
+import { useAppDispatch } from '../../hooks/redux-hooks';
+import { removeAuthUser } from '../../redux/authUser/slice';
 
 const sections = ['Posts', 'Friends'];
 
 const Profile: React.FC = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const { loading, userData } = useUserData(id);
   const [sectionIndex, setSectionIndex] = React.useState(0);
   const [avatarUploadMode, setAvatarUploadMode] = React.useState(false);
   const [isFriendRequested, setIsFriendRequested] = React.useState(
-    userData?.friendRequests && userData.friendRequests.includes(auth.currentUser!.uid),
+    userData?.friendRequests && userData.friendRequests.includes(auth.currentUser?.uid),
   );
   const [isFriendAdded, setIsFriendAdded] = React.useState(
-    userData?.friendRequests && userData.friends.includes(auth.currentUser!.uid),
+    userData?.friendRequests && userData.friends.includes(auth.currentUser?.uid),
   );
-
+  const dispatch = useAppDispatch();
   async function handleFriendAdd() {
     if (!isFriendRequested) {
       await onAddFriend(id!, auth.currentUser!.uid, isFriendRequested);
@@ -41,9 +44,9 @@ const Profile: React.FC = () => {
 
   React.useEffect(() => {
     setIsFriendRequested(
-      userData?.friendRequests && userData?.friendRequests.includes(auth.currentUser!.uid),
+      userData?.friendRequests && userData?.friendRequests.includes(auth.currentUser?.uid),
     );
-    setIsFriendAdded(userData?.friendRequests && userData?.friends.includes(auth.currentUser!.uid));
+    setIsFriendAdded(userData?.friendRequests && userData?.friends.includes(auth.currentUser?.uid));
   }, [userData]);
 
   if (loading) {
@@ -82,16 +85,21 @@ const Profile: React.FC = () => {
             {!isFriendAdded ? (
               auth.currentUser?.uid !== id ? (
                 <div className={s.addFriend}>
-                  {!isFriendRequested ? (
-                    <span onClick={handleFriendAdd}>
-                      <FontAwesomeIcon icon={faUserPlus} />
-                      Add friend
-                    </span>
-                  ) : (
-                    <span onClick={handleFriendAdd} style={{ backgroundColor: '#458b3d' }}>
-                      <FontAwesomeIcon icon={faHourglass} />
-                      Requested
-                    </span>
+                  {auth.currentUser && (
+                    <>
+                      {' '}
+                      {!isFriendRequested ? (
+                        <span onClick={handleFriendAdd}>
+                          <FontAwesomeIcon icon={faUserPlus} />
+                          Add friend
+                        </span>
+                      ) : (
+                        <span onClick={handleFriendAdd} style={{ backgroundColor: '#458b3d' }}>
+                          <FontAwesomeIcon icon={faHourglass} />
+                          Requested
+                        </span>
+                      )}
+                    </>
                   )}
                 </div>
               ) : (
@@ -108,16 +116,29 @@ const Profile: React.FC = () => {
           </div>
         </div>
         <div className={s.sections}>
-          {sections.map((section, i) => {
-            return (
-              <span
-                key={i}
-                style={{ color: sectionIndex === i ? '#1877f2' : '' }}
-                onClick={() => setSectionIndex(i)}>
-                {section}
-              </span>
-            );
-          })}
+          <div className={s.links}>
+            {sections.map((section, i) => {
+              return (
+                <span
+                  key={i}
+                  style={{ color: sectionIndex === i ? '#1877f2' : '' }}
+                  onClick={() => setSectionIndex(i)}>
+                  {section}
+                </span>
+              );
+            })}
+          </div>
+          {auth.currentUser?.uid === id && (
+            <span
+              className={s.logout}
+              onClick={() => {
+                auth.signOut();
+                dispatch(removeAuthUser());
+                navigate('/login');
+              }}>
+              Log out
+            </span>
+          )}
         </div>
         <div className={s.posts}>
           <h2>

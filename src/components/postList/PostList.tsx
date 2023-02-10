@@ -19,9 +19,6 @@ const PostList: React.FC = () => {
     })();
   }, [id]);
 
-  if (!posts) {
-    return <>loading</>;
-  }
   return (
     <>
       {posts &&

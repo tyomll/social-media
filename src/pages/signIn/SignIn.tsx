@@ -7,7 +7,6 @@ import { setAuthUser } from '../../redux/authUser/slice';
 import LoginRegisterForm, {
   AuthDataType,
 } from '../../components/loginRegisterForm/LoginRegisterForm';
-import { UserDataType } from '../../types/userData.type';
 
 const signInStyles = {
   display: 'flex',
