@@ -1,6 +1,22 @@
 .root {
   width: 23%;
   height: 100%;
+  @media (max-width: 1000px) {
+    font-size: 13px;
+    width: 33%;
+    .buttons {
+      div {
+        padding: 3px !important;
+        svg {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+  @media (max-width: 800px) {
+    font-size: 10px;
+  }
   .container {
     display: flex;
     align-items: center;

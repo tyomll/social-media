@@ -15,7 +15,7 @@ const pages = [
     title: 'Home',
   },
   {
-    link: '/profile',
+    link: `/users/${auth.currentUser!.uid}`,
     icon: faUser,
     title: 'Profile',
   },

@@ -1,6 +1,10 @@
 .root {
   width: 23%;
   height: 100%;
+
+  @media (max-width: 1000px) {
+    width: 33%;
+  }
   .container {
     display: flex;
     align-items: center;
