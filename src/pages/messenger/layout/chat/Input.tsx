@@ -2,15 +2,14 @@ import React from 'react';
 import { faCheck, faImage, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import s from '../../Messenger.module.scss';
-import { MessageDataType } from '../../../../types/messageData.type';
 import { onMessageSend } from '../../../../utils/onMessageSend';
 import { useAppSelector } from '../../../../hooks/redux-hooks';
 
 const Input: React.FC = () => {
   const currentChat = useAppSelector((state) => state.currentChat);
-  const [message, setMessage] = React.useState<MessageDataType>({
-    text: '',
-    image: '',
+  const [message, setMessage] = React.useState({
+    text: '' as string,
+    image: '' as any,
   });
   return (
     <div className={s.input}>

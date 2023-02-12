@@ -4,7 +4,7 @@ import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { auth, db, storage } from '../firebase';
 import { MessageDataType } from './../types/messageData.type';
 
-export const onMessageSend = async (message: MessageDataType, userID: string | null, chatID: string | null,) => {
+export const onMessageSend = async (message: { text: string, image: string }, userID: string | null, chatID: string | null,) => {
 
   if (chatID) {
     if (message.image) {
