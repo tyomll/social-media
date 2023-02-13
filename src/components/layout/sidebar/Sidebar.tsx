@@ -15,7 +15,7 @@ const pages = [
     title: 'Home',
   },
   {
-    link: `/users/${auth.currentUser!.uid}`,
+    link: `/users/${auth.currentUser?.uid}`,
     icon: faUser,
     title: 'Profile',
   },
@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
         {auth.currentUser && (
           <div className={s.currentUser}>
             <Link to={`/users/${auth.currentUser?.uid}`}>
-              <Avatar id={auth.currentUser!.uid} />
+              <Avatar id={auth.currentUser?.uid} />
             </Link>
             <div className={s.userInfo}>
               <h4>{userData?.firstName + ' ' + userData?.lastName}</h4>

@@ -2,7 +2,6 @@ import { uuidv4 } from '@firebase/util';
 import { updateDoc, arrayUnion, doc } from 'firebase/firestore';
 import { ref, getDownloadURL, uploadBytes } from 'firebase/storage';
 import { auth, db, storage } from '../firebase';
-import { MessageDataType } from './../types/messageData.type';
 
 export const onMessageSend = async (message: { text: string, image: string }, userID: string | null, chatID: string | null,) => {
 
@@ -22,7 +21,7 @@ export const onMessageSend = async (message: { text: string, image: string }, us
               id: uuidv4(),
               text: message.text,
               image: imageURL,
-              senderID: auth.currentUser!.uid,
+              senderID: auth.currentUser?.uid,
               date: Date.now(),
             }),
           });
@@ -33,7 +32,7 @@ export const onMessageSend = async (message: { text: string, image: string }, us
         messages: arrayUnion({
           id: uuidv4(),
           text: message.text,
-          senderID: auth.currentUser!.uid,
+          senderID: auth.currentUser?.uid,
           date: Date.now(),
         }),
       });

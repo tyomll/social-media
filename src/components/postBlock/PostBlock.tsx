@@ -29,7 +29,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
 
   React.useEffect(() => {
     if (auth.currentUser !== null) {
-      setIsPostLiked(likes.includes(auth.currentUser!.uid));
+      setIsPostLiked(likes.includes(auth.currentUser?.uid));
     }
   }, [likes]);
 
@@ -58,7 +58,7 @@ const PostBlock: React.FC<PostDataType> = ({ id, text, image, author, date, like
           <FontAwesomeIcon
             onClick={() => {
               if (auth.currentUser) {
-                onLike(id, auth.currentUser.uid, isPostLiked!);
+                onLike(id, auth.currentUser?.uid, isPostLiked!);
               } else {
                 navigate('/login');
               }

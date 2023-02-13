@@ -8,7 +8,7 @@ export const useChats = () => {
 
   async function getChats() {
     if (auth.currentUser?.uid) {
-      onSnapshot(doc(db, 'userChats', auth.currentUser!.uid), (doc) => {
+      onSnapshot(doc(db, 'userChats', auth.currentUser?.uid), (doc) => {
         setChats(doc.data())
       })
     }

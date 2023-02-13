@@ -19,7 +19,7 @@ export async function onSelectChat(id: string) {
       });
       await updateDoc(doc(db, 'userChats', id), {
         [combinedId + '.userInfo']: {
-          id: auth.currentUser!.uid,
+          id: auth.currentUser?.uid,
         },
         [combinedId + '.date']: Date.now(),
       });

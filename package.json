@@ -1,5 +1,4 @@
 {
-  "homepage": "https://tyommmm.github.io/social-media/",
   "name": "social-media",
   "private": true,
   "version": "0.0.0",
@@ -7,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
@@ -41,5 +40,17 @@
     "gh-pages": "^5.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.0.0"
+  },
+  "description": "> This social media application is developed using the latest technologies including React, Typescript, Firebase, Redux Toolkit, and Sass.\r > The platform offers users a comprehensive set of features that allows them to create posts, comment on posts, like posts, add stories, add friends, chat with users within the application, upload and edit their avatar, and many other functionalities.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tyommmm/social-media.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tyommmm/social-media/issues"
   }
 }

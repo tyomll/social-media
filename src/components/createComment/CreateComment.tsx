@@ -23,7 +23,7 @@ const CreateComment: React.FC<CreateCommentType> = ({ postID }) => {
     <div className={s.writeComment}>
       {auth.currentUser && (
         <div className={s.avatar}>
-          <Avatar id={auth.currentUser!.uid} />
+          <Avatar id={auth.currentUser?.uid} />
         </div>
       )}
       <div className={s.input}>

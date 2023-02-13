@@ -7,7 +7,7 @@ import s from './AddStoryBlock.module.scss';
 import CreateStoryModal from '../createStoryModal/CreateStoryModal';
 
 const AddStoryBlock = () => {
-  const { userData } = useUserData(auth.currentUser!.uid);
+  const { userData } = useUserData(auth.currentUser?.uid);
   const [createStoryMode, setCreateStoryMode] = React.useState<boolean>(false);
 
   return (
