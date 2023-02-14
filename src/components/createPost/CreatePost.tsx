@@ -32,9 +32,10 @@ const CreatePost: React.FC<CreatePostType> = ({ setCreatePostMode }) => {
   };
 
   const onPost = async () => {
-    setPostData({ text: '', image: undefined });
     setCreatePostMode(false);
+    console.log(postData);
     await uploadPost(postData);
+    setPostData({ text: '', image: undefined });
   };
   if (loading) {
     return <>loading...</>;

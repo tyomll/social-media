@@ -5,6 +5,7 @@ import s from './MobileNavbar.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Avatar from '../../avatar/Avatar';
 import { Link } from 'react-router-dom';
+import CreatePost from '../../createPost/CreatePost';
 
 const pages = [
   {
@@ -25,13 +26,15 @@ const pages = [
 ];
 
 const MobileNavbar = () => {
+  const [createPostMode, setCreatePostMode] = React.useState<boolean>(false);
   return (
     <div className={s.root}>
+      {createPostMode && <CreatePost setCreatePostMode={setCreatePostMode} />}
       {pages.map((page) => {
         return (
           <React.Fragment key={page.title}>
             {page.title.toLowerCase() === 'profile' && (
-              <div className={s.create}>
+              <div className={s.create} onClick={() => setCreatePostMode(true)}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>
             )}

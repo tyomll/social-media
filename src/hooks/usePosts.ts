@@ -16,7 +16,7 @@ export const usePost = () => {
 
   async function uploadPost(post: IncomingPostType) {
     const fileRef = ref(storage, 'postImages/' + uuidv4() + '.png')
-    if (post.text !== '') {
+    if (post.text !== '' && !post.image) {
       const postCollectionRef = collection(db, 'posts');
       await addDoc(postCollectionRef, {
         id: uuidv4(),
@@ -32,7 +32,7 @@ export const usePost = () => {
         icon: "success",
       });
     }
-    else if (post.image) {
+    else if (post.image && post.text === '') {
       await uploadBytes(fileRef, post.image, { contentType: 'image/png' }).then(async () => {
         await getDownloadURL(fileRef).then(async (imageURL: string) => {
           const postCollectionRef = collection(db, 'posts');
@@ -104,8 +104,6 @@ export const usePost = () => {
       });
     }
   }
-
-
 
   const getPosts = async () => {
     const q = query(collection(db, "posts"), orderBy('date', 'desc'));
