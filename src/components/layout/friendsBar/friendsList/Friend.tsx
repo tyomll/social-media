@@ -28,7 +28,7 @@ const Friend: React.FC<FriendType> = ({ friendID }) => {
           <span>@{userData?.username}</span>
         </div>
       </div>
-      {location.pathname.includes(auth.currentUser! && auth.currentUser?.uid) && (
+      {auth.currentUser && !location.pathname.includes('users') && (
         <div className={s.dots}>
           <ThreeDotsDropdown friendID={friendID} />
         </div>

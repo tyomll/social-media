@@ -34,8 +34,8 @@ const StoryModal: React.FC<StoryModalType> = ({ setStoryViewMode }) => {
           <Stories
             stories={storyImages}
             defaultInterval={5500}
-            width={400}
-            height={600}
+            width={350}
+            height={500}
             storyStyles={storyStyles}
           />
         )}

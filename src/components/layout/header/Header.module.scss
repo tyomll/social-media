@@ -3,8 +3,18 @@
   height: 100px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.15);
 
+  @media (max-width: 750px) {
+    height: fit-content;
+
+    .container {
+      flex-direction: column;
+      padding: 20px !important;
+      gap: 20px;
+    }
+  }
   .container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
     width: 100%;
     padding: 30px;

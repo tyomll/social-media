@@ -41,6 +41,22 @@
         background-color: #fff;
         border: 1px solid rgba(128, 128, 128, 0.102);
 
+        @media (max-width: 450px) {
+          align-items: center;
+          padding: 10px;
+          justify-content: space-around;
+          gap: 10px;
+          .avatar {
+            position: inherit !important;
+          }
+          .details {
+            height: fit-content !important;
+            padding: 0px !important;
+            .userData {
+              word-break: break-all;
+            }
+          }
+        }
         .avatar {
           position: absolute;
           left: 30px;
@@ -95,6 +111,11 @@
       padding: 30px 50px;
       width: 100%;
 
+      @media (max-width: 480px) {
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
       .links {
         display: flex;
         align-items: center;

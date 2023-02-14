@@ -5,6 +5,21 @@
   @media (max-width: 1000px) {
     width: 33%;
   }
+  @media (max-width: 630px) {
+    .container {
+      .avatar {
+        img {
+          width: 30px !important;
+          height: 30px !important;
+        }
+      }
+      .buttons {
+        span {
+          font-size: 11px;
+        }
+      }
+    }
+  }
   .container {
     display: flex;
     align-items: center;

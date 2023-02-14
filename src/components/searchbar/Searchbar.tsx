@@ -14,6 +14,7 @@ interface SearchbarType {
 const Searchbar: React.FC<SearchbarType> = ({ component }) => {
   const [input, setInput] = React.useState<string>('');
   const { users, getSearchUser } = useSearch(input);
+  const [inputMode, setInputMode] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     (async () => {
@@ -24,14 +25,21 @@ const Searchbar: React.FC<SearchbarType> = ({ component }) => {
   }, [input]);
 
   return (
-    <div className={s.root}>
-      <div className={s.search}>
-        <FontAwesomeIcon icon={faSearch} />
+    <div className={s.root} style={{ width: inputMode ? 'fit-content' : '' }}>
+      <div className={s.search} style={{ paddingRight: '15px' }}>
+        <FontAwesomeIcon
+          icon={faSearch}
+          onClick={() => {
+            setInput('');
+            setInputMode(!inputMode);
+          }}
+        />
         <input
           type="text"
           placeholder="Search for users..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          hidden={inputMode}
         />
       </div>
       <div className={s.results}>

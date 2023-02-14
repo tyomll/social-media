@@ -18,10 +18,11 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
   const [x, setX] = React.useState(0);
   const [y, setY] = React.useState(0);
   const storyElementRef = React.useRef<HTMLDivElement>(null);
+  const imageElementRef = React.useRef<HTMLImageElement>(null);
   const submitElementRef = React.useRef<HTMLDivElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (event.target !== submitElementRef.current) {
+    if (event.target === imageElementRef.current) {
       setX(event.clientX);
       setY(event.clientY);
     }
@@ -49,6 +50,7 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
             icon: 'error',
           });
         });
+      setMode(false);
     } else {
       swal({
         title: 'Your story must have text or image!',
@@ -81,6 +83,7 @@ const CreateStoryModal: React.FC<CreateStoryModalType> = ({ setMode }) => {
           />
           {image && (
             <img
+              ref={imageElementRef}
               src={image}
               alt="story"
               style={{

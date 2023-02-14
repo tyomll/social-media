@@ -64,7 +64,11 @@ const Sidebar: React.FC = () => {
               return (
                 <Link
                   key={page.title + i}
-                  to={page.link}
+                  to={
+                    page.title.toLowerCase() === 'profile'
+                      ? `/users/${auth.currentUser?.uid}`
+                      : page.link
+                  }
                   className={s.page}
                   style={{ borderBottom: i === pages.length - 1 ? 'none' : '' }}>
                   <FontAwesomeIcon icon={page.icon} />

@@ -22,6 +22,10 @@
     gap: 20px;
     overflow: auto;
     position: relative;
+
+    @media (max-width: 500px) {
+      width: 300px;
+    }
     .author {
       display: flex;
       align-content: center;
