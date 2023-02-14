@@ -28,31 +28,35 @@ const pages = [
 const MobileNavbar = () => {
   const [createPostMode, setCreatePostMode] = React.useState<boolean>(false);
   return (
-    <div className={s.root}>
-      {createPostMode && <CreatePost setCreatePostMode={setCreatePostMode} />}
-      {pages.map((page) => {
-        return (
-          <React.Fragment key={page.title}>
-            {page.title.toLowerCase() === 'profile' && (
-              <div className={s.create} onClick={() => setCreatePostMode(true)}>
-                <FontAwesomeIcon icon={faPlus} />
-              </div>
-            )}
-            <Link to={page.link} className={s.page}>
-              {page.title.toLowerCase() === 'profile' ? (
-                <>
-                  <div className={s.avatar}>
-                    <Avatar id={auth.currentUser?.uid} />
+    <>
+      {auth.currentUser && (
+        <div className={s.root}>
+          {createPostMode && <CreatePost setCreatePostMode={setCreatePostMode} />}
+          {pages.map((page) => {
+            return (
+              <React.Fragment key={page.title}>
+                {page.title.toLowerCase() === 'profile' && (
+                  <div className={s.create} onClick={() => setCreatePostMode(true)}>
+                    <FontAwesomeIcon icon={faPlus} />
                   </div>
-                </>
-              ) : (
-                <FontAwesomeIcon icon={page.icon} />
-              )}
-            </Link>
-          </React.Fragment>
-        );
-      })}
-    </div>
+                )}
+                <Link to={page.link} className={s.page}>
+                  {page.title.toLowerCase() === 'profile' ? (
+                    <>
+                      <div className={s.avatar}>
+                        <Avatar id={auth.currentUser?.uid} />
+                      </div>
+                    </>
+                  ) : (
+                    <FontAwesomeIcon icon={page.icon} />
+                  )}
+                </Link>
+              </React.Fragment>
+            );
+          })}
+        </div>
+      )}
+    </>
   );
 };
 

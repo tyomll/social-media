@@ -13,7 +13,6 @@ const signUpStyles = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: 'calc(100vh - 200px)',
   width: '100%',
 };
 const content = {

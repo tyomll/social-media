@@ -15,7 +15,36 @@
       display: none;
     }
   }
-
+  @media (max-width: 740px) {
+    .signIn {
+      span {
+        display: none;
+      }
+    }
+    .signUp {
+      span {
+        display: none;
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    height: auto;
+    .container {
+      flex-direction: column;
+    }
+    .logo {
+      a {
+        gap: 10px !important;
+      }
+      svg {
+        width: 35px !important;
+        height: 35px !important;
+      }
+      span {
+        font-size: 16px !important;
+      }
+    }
+  }
   .container {
     display: flex;
     align-items: center;

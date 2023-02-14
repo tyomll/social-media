@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className={s.root} style={{ width: !auth.currentUser ? '75%' : '' }}>
+    <div className={s.root}>
       {auth.currentUser && <Stories />}
 
       {createPostMode && (
