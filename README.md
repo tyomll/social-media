@@ -28,11 +28,20 @@ https://github.com/tyommmm/social-media.git
 ```sh
 npm install
 ```
-3. Start the development server
+3. Add .env file in your root directory and fill your Firebase details.
+```sh
+VITE_REACT_APP_FIREBASE_API_KEY = apikey
+VITE_REACT_APP_FIREBASE_AUTH_DOMAIN = authdomain
+VITE_REACT_APP_FIREBASE_PROJECT_ID = projectid
+VITE_REACT_APP_FIREBASE_STORAGE_BUCKET = storagebucket
+VITE_REACT_APP_FIREBASE_MESSAGING_SENDER_ID = messagingsenderid
+VITE_REACT_APP_FIREBASE_APP_ID = appid
+```
+4. Start the development server
 ```sh
 npm run dev
 ```
-4. Open your preferred web browser and navigate to `http://localhost:5173` to access the application.
+5. Open your preferred web browser and navigate to `http://localhost:5173` to access the application.
 
 ## Technologies Used
 - React
