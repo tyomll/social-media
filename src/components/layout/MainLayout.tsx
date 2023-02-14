@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import FriendsBar from './friendsBar/FriendsBar';
 import Header from './header/Header';
+import MobileNavbar from './mobileNavbar/MobileNavbar';
 import Sidebar from './sidebar/Sidebar';
 
 const layoutContentStyles = {
@@ -28,6 +29,7 @@ const MainLayout: React.FC = () => {
           </>
         )}
       </div>
+      <MobileNavbar />
     </>
   );
 };

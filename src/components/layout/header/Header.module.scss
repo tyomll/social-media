@@ -3,15 +3,19 @@
   height: 100px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.15);
 
-  @media (max-width: 750px) {
-    height: fit-content;
-
+  @media (max-width: 910px) {
     .container {
-      flex-direction: column;
       padding: 20px !important;
       gap: 20px;
     }
+    .create {
+      display: none !important;
+    }
+    .avatar {
+      display: none;
+    }
   }
+
   .container {
     display: flex;
     align-items: center;
@@ -42,23 +46,24 @@
       display: flex;
       align-items: center;
       gap: 30px;
-    }
-    .create {
-      display: flex;
-      align-items: center;
-      border-radius: 10px;
-      padding: 12px;
-      color: white;
-      background-color: #1877f2;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .avatar {
-      cursor: pointer;
-      img {
-        border-radius: 15px;
-        width: 50px;
-        height: 50px;
+
+      .create {
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        padding: 12px;
+        color: white;
+        background-color: #1877f2;
+        gap: 10px;
+        cursor: pointer;
+      }
+      .avatar {
+        cursor: pointer;
+        img {
+          border-radius: 15px;
+          width: 50px;
+          height: 50px;
+        }
       }
     }
     .signIn {

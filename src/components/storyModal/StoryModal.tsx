@@ -37,6 +37,7 @@ const StoryModal: React.FC<StoryModalType> = ({ setStoryViewMode }) => {
             width={350}
             height={500}
             storyStyles={storyStyles}
+            onStoryEnd={() => setStoryViewMode(false)}
           />
         )}
       </div>

@@ -1,0 +1,40 @@
+.root {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  padding: 10px 40px;
+  box-shadow: 2px 2px 9px 1px rgb(0 0 0 / 19%);
+  gap: 10px;
+
+  @media (max-width: 910px) {
+    display: flex;
+  }
+  .page {
+    svg {
+      color: #556273;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  .create {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    padding: 12px;
+    color: white;
+    background-color: #1877f2;
+    gap: 10px;
+    cursor: pointer;
+    width: 50px;
+  }
+}
