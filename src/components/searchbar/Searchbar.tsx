@@ -5,13 +5,14 @@ import s from './Searchbar.module.scss';
 import Avatar from '../avatar/Avatar';
 import { useSearch } from '../../hooks/useSearch';
 import { auth } from '../../firebase';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { onSelectChat } from '../../utils/onSelectChat';
 
 interface SearchbarType {
   component?: string;
 }
 const Searchbar: React.FC<SearchbarType> = ({ component }) => {
+  const location = useLocation();
   const [input, setInput] = React.useState<string>('');
   const { users, getSearchUser } = useSearch(input);
   const [inputMode, setInputMode] = React.useState<boolean>(true);
@@ -39,7 +40,7 @@ const Searchbar: React.FC<SearchbarType> = ({ component }) => {
           placeholder="Search for users..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          hidden={inputMode}
+          hidden={!location.pathname.includes('messenger') ? inputMode : false}
         />
       </div>
       <div className={s.results}>

@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  padding: 30px;
+  min-height: calc(100vh - 100px);
+  background-color: #f9fafc;
+  gap: 50px;
+
+  @media (max-width: 910px) {
+    padding-bottom: 200px;
+  }
+}

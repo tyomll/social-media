@@ -4,21 +4,14 @@ import FriendsBar from './friendsBar/FriendsBar';
 import Header from './header/Header';
 import MobileNavbar from './mobileNavbar/MobileNavbar';
 import Sidebar from './sidebar/Sidebar';
-
-const layoutContentStyles = {
-  display: 'flex',
-  padding: '30px',
-  minHeight: 'calc(100vh - 100px)',
-  backgroundColor: '#F9FAFC',
-  gap: '50px',
-};
+import s from './MainLayout.module.scss';
 
 const MainLayout: React.FC = () => {
   const location = useLocation();
   return (
     <>
       <Header />
-      <div style={layoutContentStyles}>
+      <div className={s.root}>
         {location.pathname === '/register' || location.pathname === '/login' ? (
           <Outlet />
         ) : (

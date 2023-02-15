@@ -16,8 +16,11 @@
   }
   .page {
     svg {
-      color: #556273;
-      font-size: 28px;
+      color: #fff;
+      font-size: 18px;
+      background-color: #1877f2;
+      padding: 12px;
+      border-radius: 10px;
       cursor: pointer;
     }
     .avatar {
