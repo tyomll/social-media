@@ -8,6 +8,7 @@ import { setAuthUser } from '../../redux/authUser/slice';
 import LoginRegisterForm, {
   AuthDataType,
 } from '../../components/loginRegisterForm/LoginRegisterForm';
+import swal from 'sweetalert';
 
 const signUpStyles = {
   display: 'flex',
@@ -31,37 +32,49 @@ const SignIn: React.FC = () => {
   const navigate = useNavigate();
 
   function handleRegister(data: AuthDataType) {
-    createUserWithEmailAndPassword(auth, data.email, data.password).then(async ({ user }) => {
-      const usersRef = doc(db, 'users', user.uid);
-      const userChatsRef = doc(db, 'userChats', user.uid);
-      await setDoc(usersRef, {
-        id: user.uid,
-        email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        username: data.username,
-        avatar: defaultAvatar,
-        coverImage: defaultCoverImage,
-        createdAt: Date.now().toString(),
-        friends: [],
-      });
-      await setDoc(userChatsRef, {});
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: data.username,
-          photoURL: defaultAvatar,
-        });
-      }
-      dispatch(
-        setAuthUser({
+    createUserWithEmailAndPassword(auth, data.email, data.password)
+      .then(async ({ user }) => {
+        const usersRef = doc(db, 'users', user.uid);
+        const userChatsRef = doc(db, 'userChats', user.uid);
+        await setDoc(usersRef, {
           id: user.uid,
-          username: user.displayName,
-          email: user.email,
-          token: user.refreshToken,
-        }),
-      );
-      navigate(`/users/${user.uid}`);
-    });
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          username: data.username,
+          avatar: defaultAvatar,
+          coverImage: defaultCoverImage,
+          createdAt: Date.now().toString(),
+          friends: [],
+        });
+        await setDoc(userChatsRef, {});
+        if (auth.currentUser) {
+          await updateProfile(auth.currentUser, {
+            displayName: data.username,
+            photoURL: defaultAvatar,
+          });
+        }
+        dispatch(
+          setAuthUser({
+            id: user.uid,
+            username: user.displayName,
+            email: user.email,
+            token: user.refreshToken,
+          }),
+        );
+        navigate(`/users/${user.uid}`);
+      })
+      .catch((err) => {
+        switch (err.code) {
+          case 'auth/email-already-in-use':
+            swal({
+              title: 'Oops ErRoR!',
+              text: 'Email already in use. Try another one.',
+              icon: 'error',
+            });
+            break;
+        }
+      });
   }
   return (
     <div style={signUpStyles}>
